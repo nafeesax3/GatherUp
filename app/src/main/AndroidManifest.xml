@@ -9,6 +9,11 @@
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,11 +37,55 @@
         <activity
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps">
+        </activity>
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".HomeScreenActivity"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".UserRegesteredEventListActivity"
+            android:label="@string/title_userregesteredevent_list"
+            android:parentActivityName=".HomeScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
+        </activity>
+        <activity
+            android:name=".UserRegesteredEventDetailActivity"
+            android:label="@string/title_userregesteredevent_detail"
+            android:parentActivityName=".UserRegesteredEventListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="www.gatherup.com.gatherup.UserRegesteredEventListActivity" />
+        </activity>
+        <activity
+            android:name=".UserAccountActivity"
+            android:label="@string/title_activity_user_account"
+            android:parentActivityName=".HomeScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
+        </activity>
+        <activity
+            android:name=".EventCreationActivity"
+            android:label="@string/title_activity_event_creation"
+            android:parentActivityName=".HomeScreenActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
         </activity>
     </application>
 
