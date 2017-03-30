@@ -31,6 +31,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.io.IOException;
 import java.util.List;
 
+import www.gatherup.com.gatherup.data.Event;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
     private static final int ERROR_DIALOG_REQUEST = 90;
@@ -56,14 +58,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
          //       .findFragmentById(R.id.map);
         //mapFragment.getMapAsync(this);
+        Bundle bundle = getIntent().getExtras();
+        Event event = (Event)bundle.get("event");
+        latitude = event.getLatitude();
+        longitude = event.getLongitude();
+
         if (servicesOK()) {
             setContentView(R.layout.activity_maps);
 
             if (initMap()) {
-                gotoLocation(latitude, longitude, 15);
+                gotoLocation(latitude, longitude, 20);
 
             } else {
-                Toast.makeText(this, "Map not connected!", Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(this, "Map not connected!", Toast.LENGTH_SHORT).show();
             }
 
         } else {
@@ -87,7 +95,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Add a marker in Sydney and move the camera
         LatLng eventLoc = new LatLng(latitude, longitude);
         mMap.addMarker(new MarkerOptions().position(eventLoc).title("Event Marker"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(eventLoc));
+        CameraUpdate center = CameraUpdateFactory.newLatLng(eventLoc);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(12);
+
+        mMap.moveCamera(center);
+        mMap.animateCamera(zoom);
+
+
+
     }
 
 
@@ -120,7 +135,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void gotoLocation(double lat, double lng, float zoom) {
         LatLng latLng = new LatLng(lat, lng);
-        CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, zoom);
+        //CameraUpdate update = CameraUpdateFactory.newLatLngZoom(latLng, zoom);
+        CameraUpdate update = CameraUpdateFactory.zoomTo( 15);
         mMap.moveCamera(update);
     }
 
@@ -150,24 +166,26 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     //}
 
-    private void addMarker(Address add, double lat, double lng) {
+    private void addMarker(Address ad, double lat, double lng) {
 
         if (marker != null) {
             removeEverything();
         }
 
         MarkerOptions options = new MarkerOptions()
-                .title(add.getLocality())
+                //.title(add.getLocality())
                 .position(new LatLng(lat, lng))
                 .draggable(true)
                 .icon(BitmapDescriptorFactory.defaultMarker());
 //              .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_map_marker));
-        String country = add.getCountryName();
+       /* String country = add.getCountryName();
         if (country.length() > 0) {
             options.snippet(country);
-        }
+        }*/
 
         marker = mMap.addMarker(options);
+
+        gotoLocation(lat, lng, 5);
 
     }
 

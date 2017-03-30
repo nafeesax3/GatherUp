@@ -68,12 +68,12 @@
         android:textSize="20sp"/>
 
     <EditText
+        android:id="@+id/create_acc_pass_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:id="@+id/create_acc_pass_edit"
         android:hint="**********"
-        android:inputType="textPersonName"/>
+        android:inputType="textPassword" />
 
     <TextView
         android:text="Confirm Password"
@@ -84,13 +84,13 @@
         android:textSize="20sp" />
 
     <EditText
+        android:id="@+id/create_acc_pass_confirm_edit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
         android:ems="10"
-        android:id="@+id/create_acc_pass_confirm_edit"
         android:hint="**********"
-        android:inputType="textPersonName"
-        android:layout_marginBottom="15dp" />
+        android:inputType="textPassword" />
 
     <Button
         android:text="Create Account"

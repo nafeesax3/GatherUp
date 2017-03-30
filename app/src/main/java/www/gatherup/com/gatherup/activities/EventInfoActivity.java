@@ -1,15 +1,18 @@
 package www.gatherup.com.gatherup.activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Calendar;
 import java.util.Locale;
 
+import www.gatherup.com.gatherup.MapsActivity;
 import www.gatherup.com.gatherup.R;
 import www.gatherup.com.gatherup.data.Event;
 
@@ -50,6 +53,15 @@ public class EventInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"You succesfully registered", Toast.LENGTH_SHORT).show();
                 rsvpBtn.setEnabled(false);
+            }
+        });
+
+        mapBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(EventInfoActivity.this, MapsActivity.class);
+                intent.putExtra("event", event);
+                startActivity(intent);
             }
         });
 
