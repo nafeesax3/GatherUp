@@ -16,6 +16,7 @@ public class Event implements Parcelable {
     private double latitude;
     private double longitude;
     private User owner;
+    private String address;
     private ArrayList<User> atendeesList;
     private Calendar startDate;
     private Calendar endDate;
@@ -31,6 +32,7 @@ public class Event implements Parcelable {
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
+        address = "";
         this.startDate = startDate;
         this.endDate = endDate;
         this.category = category;
@@ -118,6 +120,13 @@ public class Event implements Parcelable {
         this.category = category;
     }
 
+    public String getAddress() {
+        return address;
+    }
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     @Override
     public int describeContents() {
         return 0;
@@ -129,6 +138,7 @@ public class Event implements Parcelable {
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
         dest.writeValue(owner);
+        dest.writeString(address);
         if (atendeesList == null) {
             dest.writeByte((byte) (0x00));
         } else {
@@ -148,6 +158,7 @@ public class Event implements Parcelable {
         latitude = in.readDouble();
         longitude = in.readDouble();
         owner = (User) in.readValue(User.class.getClassLoader());
+        address = in.readString();
         if (in.readByte() == 0x01) {
             atendeesList = new ArrayList<User>();
             in.readList(atendeesList, User.class.getClassLoader());

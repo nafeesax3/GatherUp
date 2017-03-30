@@ -46,6 +46,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 
+import www.gatherup.com.gatherup.activities.CreateAccountActivity;
+
 import static android.Manifest.permission.LOCATION_HARDWARE;
 import static android.Manifest.permission.READ_CONTACTS;
 
@@ -95,7 +97,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         };
 
-        updateStatus();
+        //updateStatus();
     }
 
     /**
@@ -126,7 +128,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.login_signup_btn:
-                createUserAccount();
+                Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
+                startActivity(intent);
+                //createUserAccount();
                 break;
 
             case R.id.login_fb_btn:
