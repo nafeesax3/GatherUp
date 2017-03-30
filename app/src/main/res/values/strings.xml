@@ -114,4 +114,9 @@
         "when a user tries to pick up one of cards.\n\n"
     </string>
     <string name="title_activity_event_creation">EventCreationActivity</string>
+    <string name="email_address">Email Address:</string>
+    <string name="password">Password:</string>
+    <string name="sign_in">Sign In</string>
+    <string name="create_account">Create Account</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
