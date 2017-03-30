@@ -231,6 +231,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 if (task.isSuccessful()) {
                                     Toast.makeText(LoginActivity.this, "User created", Toast.LENGTH_SHORT)
                                             .show();
+                                    updateStatus("User created");
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Account creation failed", Toast.LENGTH_SHORT)
                                             .show();
