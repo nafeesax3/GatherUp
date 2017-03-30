@@ -47,7 +47,7 @@ import static android.Manifest.permission.READ_CONTACTS;
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor>,View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
     private final String TAG = "FB_SIGNIN";
     // Add Auth Members
     private FirebaseAuth mAuth;
@@ -59,13 +59,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final int REQUEST_READ_CONTACTS = 0;
 
     /**
-     * A dummy authentication store containing known user names and passwords.
-     * TODO: remove after connecting to a real authentication system.
-     */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
-    /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
@@ -73,6 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+
     private View mProgressView;
     private View mLoginFormView;
 
@@ -109,7 +103,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         // Get a reference to the Firebase auth object
         mAuth = FirebaseAuth.getInstance();
-        // Attach a new AuthListener to detect sin in and out
+
+        // Attach a new AuthListener to detect sign in and out
         mAuthListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth){
@@ -125,7 +120,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         updateStatus();
     }
     private void updateStatus(){
-        TextView tvStat  (TextView)findViewById(R.id.tvSignInStatus);
+        TextView tvStat = (TextView)findViewById(R.id.tvSignInStatus);
         // Get the current user
         FirebaseUser user = mAuth.getCurrentUser();
         if(user != null){
@@ -332,11 +327,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mEmailView.setAdapter(adapter);
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-
 
     private interface ProfileQuery {
         String[] PROJECTION = {
@@ -367,21 +357,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // TODO: attempt authentication against a network service.
 
             try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
+                signUserIn();
+            } catch (Exception e) {
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-
             // TODO: register the new account here.
+            createUserAccount();
             return true;
         }
 
@@ -403,49 +385,69 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = null;
             showProgress(false);
         }
-        private void createUserAccount(){
-            if(!checkFormFields())
-                return;
+    }
 
-            String email = mEmailView.getText().toString();
-            String password = mPasswordView.getText().toString();
-            mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this,"User was Created",Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this,"Account Creation Failed",Toast.LENGTH_SHORT).show();
-                    }
+
+
+
+    private void createUserAccount(){
+        if(!checkFormFields())
+            return;
+
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+        mAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this,"User was Created",Toast.LENGTH_SHORT).show();
                 }
-            });
-        }
-        private void signUserIn(){
-            if(!checkFormFields())
-                return;
-            String email = mEmailView.getText().toString();
-            String password = mPasswordView.getText().toString();
-
-            // Sign the user in with email and password credentials
-            mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
-                    if(task.isSuccessful()){
-                        Toast.makeText(LoginActivity.this,"Signed In",Toast.LENGTH_SHORT).show();
-                    }
-                    else{
-                        Toast.makeText(LoginActivity.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
-                    }
-                    updateStatus();
+                else{
+                    Toast.makeText(LoginActivity.this,"Account Creation Failed",Toast.LENGTH_SHORT).show();
                 }
-            });
+            }
+        });
+    }
+    private void signUserIn(){
+        if(!checkFormFields())
+            return;
+        String email = mEmailView.getText().toString();
+        String password = mPasswordView.getText().toString();
+
+        // Sign the user in with email and password credentials
+        mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener((Executor) this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(task.isSuccessful()){
+                    Toast.makeText(LoginActivity.this,"Signed In",Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"Sign In Failed",Toast.LENGTH_SHORT).show();
+                }
+                updateStatus();
+            }
+        });
+    }
+    private void signUserOut(){
+        mAuth.signOut();
+        updateStatus();
+    }
+    private boolean checkFormFields() {
+        String email, password;
+
+        email = mEmailView.getText().toString();
+        password = mPasswordView.getText().toString();
+
+        if (email.isEmpty()) {
+            mEmailView.setError("Email Required");
+            return false;
         }
-        private void signUserOut(){
-            mAuth.signOut();
-            updateStatus();
+        if (password.isEmpty()){
+            mPasswordView.setError("Password Required");
+            return false;
         }
 
+        return true;
     }
 }
 
