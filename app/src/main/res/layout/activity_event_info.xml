@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    tools:context="www.gatherup.com.gatherup.activities.EventInfoActivity">
+
+    <TextView
+        android:id="@+id/event_info_title_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:textColor="@color/colorBlack"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:text="Title" />
+
+    <TextView
+        android:id="@+id/event_info_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/event_info_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Time"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/event_info_address"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Address"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/event_info_owner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hosted by"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/event_info_rsvp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:text="I am going"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/event_info_open_map_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:text="View Map"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/event_info_atendees"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=" people are going"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:text="Description"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/event_info_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Text goes here"
+        android:textColor="@color/colorBlack"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/event_info_edit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        android:text="Edit event"
+        android:textSize="16sp" />
+</LinearLayout>
