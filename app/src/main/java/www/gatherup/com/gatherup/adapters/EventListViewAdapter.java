@@ -50,7 +50,8 @@ public class EventListViewAdapter extends ArrayAdapter<Event> {
         shortDay.setText(event.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()) );
         dayNumber.setText(String.valueOf(event.getEndDate().get(Calendar.DAY_OF_MONTH)) );
         title.setText(event.getTitle());
-        location.setText(AddressGenerator.getAddressLine(getContext(), event.getLatitude(), event.getLongitude()));
+        //location.setText(AddressGenerator.getAddressLine(getContext(), event.getLatitude(), event.getLongitude()));
+        location.setText(event.getAddress());
         dayAndTime.setText(event.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + " " + event.getStartDate().get(Calendar.HOUR) + ":" + event.getStartDate().get(Calendar.MINUTE) + " " + event.getStartDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()));
         category.setText(event.getCategory());
         numberOfPeople.setText("RSVP: " + String.valueOf( event.getAtendeesList().size()));

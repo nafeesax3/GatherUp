@@ -40,21 +40,19 @@
 
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps">
-        </activity>
+            android:label="@string/title_activity_maps"></activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login" >
+            android:label="@string/title_activity_login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CreateAccountActivity"
-            android:label="Create Account">
-
-        </activity>
+        <activity
+            android:name=".activities.CreateAccountActivity"
+            android:label="Create Account"></activity>
         <activity
             android:name=".HomeScreenActivity"
             android:label="@string/title_activity_home_screen"
@@ -95,6 +93,7 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
         </activity>
+        <activity android:name=".activities.EventInfoActivity"></activity>
     </application>
 
 </manifest>

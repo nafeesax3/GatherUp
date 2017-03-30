@@ -1,5 +1,6 @@
 package www.gatherup.com.gatherup.data;
 
+import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -24,15 +25,15 @@ public class Event implements Parcelable {
     private String category;
     private double rating;
 
-    public Event(){
-        this("title", 0.0, 0.0, Calendar.getInstance(), Calendar.getInstance(), "description", "category");
+    public Event(Context context){
+        this(context, "title", 0.0, 0.0, Calendar.getInstance(), Calendar.getInstance(), "description", "category");
     }
 
-    public Event(String title, double latitude, double longitude, Calendar startDate, Calendar endDate, String description, String category) {
+    public Event(Context context, String title, double latitude, double longitude, Calendar startDate, Calendar endDate, String description, String category) {
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
-        address = "";
+        address = AddressGenerator.getAddressLine(context, latitude, longitude);
         this.startDate = startDate;
         this.endDate = endDate;
         this.category = category;
