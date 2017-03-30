@@ -56,13 +56,13 @@ public class HomeScreenActivity extends AppCompatActivity
 
         // Create mock eventlist
         eventList = new ArrayList<>();
-        eventList.add(new Event(this, "Get together to study Math", 40.0, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
-        eventList.add(new Event(this, "D&D Friday night", 41.0, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
-        eventList.add(new Event(this, "Looking for lost cat", 40.0, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
-        eventList.add(new Event(this, "Programming tutoring session", 23.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
-        eventList.add(new Event(this, "FSC LASSO Dance Night (Students only)", 53.3, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
-        eventList.add(new Event(this, "Hike through Bethpage park", 54.4, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
-        eventList.add(new Event(this, "Get together to study Chemistry", 9.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        eventList.add(new Event(this, "Get together to study Math", 40.7493182, -73.4250478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        eventList.add(new Event(this, "D&D Friday night", 40.7495182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
+        eventList.add(new Event(this, "Looking for lost cat", 40.7483182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
+        eventList.add(new Event(this, "Programming tutoring session", 40.7490182, -73.4200478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        eventList.add(new Event(this, "FSC LASSO Dance Night (Students only)", 40.7493442, -73.4234478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
+        eventList.add(new Event(this, "Hike through Bethpage park", 40.7493456, -73.4250000, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
+        eventList.add(new Event(this, "Get together to study Chemistry", 40.7493455, -73.4250111, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
         eventList.add(new Event(this, "Watch the Packers win ", 43.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
         eventList.add(new Event(this, "Zoo trip", 33.3, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
 

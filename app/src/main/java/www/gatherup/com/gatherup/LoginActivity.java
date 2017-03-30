@@ -79,6 +79,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etEmail = (EditText)findViewById(R.id.etEmailAddr);
         etPass = (EditText)findViewById(R.id.etPassword);
 
+        etEmail.setText("testuser@test.com");
+        etPass.setText("testpass");
+
         // TODO: Get a reference to the Firebase auth object
         mAuth = FirebaseAuth.getInstance();
 

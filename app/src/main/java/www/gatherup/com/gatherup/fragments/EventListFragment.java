@@ -1,6 +1,7 @@
 package www.gatherup.com.gatherup.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,10 +13,12 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
+import www.gatherup.com.gatherup.HomeScreenActivity;
 import www.gatherup.com.gatherup.R;
 
 import java.util.ArrayList;
 
+import www.gatherup.com.gatherup.activities.EventInfoActivity;
 import www.gatherup.com.gatherup.adapters.EventListViewAdapter;
 import www.gatherup.com.gatherup.data.Event;
 
@@ -88,7 +91,7 @@ public class EventListFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        ListView eventListView = (ListView)view.findViewById(R.id.eventlist_fragment_listview);
+        final ListView eventListView = (ListView)view.findViewById(R.id.eventlist_fragment_listview);
         EventListViewAdapter adapter = new EventListViewAdapter(this.getContext(), eventArrayList);
 
         eventListView.setAdapter(adapter);
@@ -105,6 +108,16 @@ public class EventListFragment extends Fragment {
         //TextView textView = (TextView)view.findViewById(R.id.test_text_view);
         //textView.setText(mParam1 + " " + mParam2);
 
+        eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Event event = (Event)eventListView.getItemAtPosition(position);
+                Intent intent = new Intent(getActivity(), EventInfoActivity.class);
+                intent.putExtra("event", event);
+                startActivity(intent);
+
+            }
+        });
     }
 
     @Override
