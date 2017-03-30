@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-//import com.example.seniorproject.test.R;
+
 import www.gatherup.com.gatherup.R;
 
 import java.util.ArrayList;

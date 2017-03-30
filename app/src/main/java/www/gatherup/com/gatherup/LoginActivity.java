@@ -3,6 +3,7 @@ package www.gatherup.com.gatherup;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -69,9 +70,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         // Set up click handlers and view item references
-        findViewById(R.id.btnCreate).setOnClickListener(this);
-        findViewById(R.id.btnSignIn).setOnClickListener(this);
-        findViewById(R.id.btnSignOut).setOnClickListener(this);
+        findViewById(R.id.login_signup_btn).setOnClickListener(this);
+        findViewById(R.id.login_signin_btn).setOnClickListener(this);
+        findViewById(R.id.login_fb_btn).setOnClickListener(this);
 
         etEmail = (EditText)findViewById(R.id.etEmailAddr);
         etPass = (EditText)findViewById(R.id.etPassword);
@@ -120,16 +121,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btnSignIn:
+            case R.id.login_signin_btn:
                 signUserIn();
                 break;
 
-            case R.id.btnCreate:
+            case R.id.login_signup_btn:
                 createUserAccount();
                 break;
 
-            case R.id.btnSignOut:
-                signUserOut();
+            case R.id.login_fb_btn:
+                Toast.makeText(getApplicationContext(), "Login with Facebook", Toast.LENGTH_SHORT);
+                //signUserOut();
                 break;
         }
     }
@@ -182,6 +184,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
+                                    Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
+                                    // Send username
+                                    //intent.putExtra("username", something);
+                                    startActivity(intent);
                                     Toast.makeText(LoginActivity.this, "Signed in", Toast.LENGTH_SHORT)
                                             .show();
                                 }
