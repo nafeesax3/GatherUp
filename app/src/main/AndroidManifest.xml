@@ -17,7 +17,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
         android:allowBackup="true"
@@ -38,11 +38,13 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-        <meta-data android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version"/>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+
         <activity
             android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"></activity>
+            android:label="@string/title_activity_maps" />
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login">
@@ -54,7 +56,7 @@
         </activity>
         <activity
             android:name=".activities.CreateAccountActivity"
-            android:label="Create Account"></activity>
+            android:label="Create Account" />
         <activity
             android:name=".HomeScreenActivity"
             android:label="@string/title_activity_home_screen"
@@ -86,16 +88,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
         </activity>
-        <activity
-            android:name=".EventCreationActivity"
-            android:label="@string/title_activity_event_creation"
-            android:parentActivityName=".HomeScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
-        </activity>
-        <activity android:name=".activities.EventInfoActivity"></activity>
+        <activity android:name=".activities.EventInfoActivity" />
+        <activity android:name=".activities.SearchMapActivity" />
+        <activity android:name=".activities.CreateEventActivity" />
+        <activity android:name=".activities.MyEventsActivity"></activity>
     </application>
 
 </manifest>

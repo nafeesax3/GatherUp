@@ -31,7 +31,7 @@ public class EventInfoActivity extends AppCompatActivity {
         TextView timetv = (TextView)findViewById(R.id.event_info_time);
         TextView addressTv = (TextView)findViewById(R.id.event_info_address);
         TextView hostedByTv = (TextView)findViewById(R.id.event_info_owner);
-        TextView rsvpTv = (TextView)findViewById(R.id.event_info_atendees);
+        final TextView rsvpTv = (TextView)findViewById(R.id.event_info_atendees);
         TextView description = (TextView)findViewById(R.id.event_info_desc);
         final Button rsvpBtn = (Button)findViewById(R.id.event_info_rsvp);
         Button mapBtn = (Button)findViewById(R.id.event_info_open_map_btn);
@@ -53,6 +53,8 @@ public class EventInfoActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(),"You succesfully registered", Toast.LENGTH_SHORT).show();
                 rsvpBtn.setEnabled(false);
+
+                rsvpTv.setText(event.getAtendeesList().size()+1 + " people are going");
             }
         });
 
