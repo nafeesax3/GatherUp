@@ -47,6 +47,8 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 import www.gatherup.com.gatherup.activities.CreateAccountActivity;
+import www.gatherup.com.gatherup.data.User;
+import www.gatherup.com.gatherup.models.Firebase_Model;
 
 import static android.Manifest.permission.LOCATION_HARDWARE;
 import static android.Manifest.permission.READ_CONTACTS;
@@ -56,12 +58,9 @@ import static android.Manifest.permission.READ_CONTACTS;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private final String TAG = "FB_SIGNIN";
-
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-
     private EditText etPass;
     private EditText etEmail;
+    private TextView status_TV;
 
     /**
      * Standard Activity lifecycle methods
@@ -70,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        status_TV = (TextView)findViewById(R.id.tvSignInStatus);
 
         // Set up click handlers and view item references
         findViewById(R.id.login_signup_btn).setOnClickListener(this);
@@ -78,29 +78,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         etEmail = (EditText)findViewById(R.id.etEmailAddr);
         etPass = (EditText)findViewById(R.id.etPassword);
-
-        //etEmail.setText("testuser@test.com");
-        //etPass.setText("testpass");
-
-        // TODO: Get a reference to the Firebase auth object
-        mAuth = FirebaseAuth.getInstance();
-
-        // TODO: Attach a new AuthListener to detect sign in and out
-        mAuthListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user != null) {
-                    // User is signed in
-                    Log.d(TAG, "Signed in: " + user.getUid());
-                } else {
-                    // User is signed out
-                    Log.d(TAG, "Currently signed out");
-                }
-            }
-        };
-
-        //updateStatus();
     }
 
     /**
@@ -111,16 +88,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onStart() {
         super.onStart();
         // TODO: add the AuthListener
-        mAuth.addAuthStateListener(mAuthListener);
+        Firebase_Model.get().addAuthListener();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         // TODO: Remove the AuthListener
-        if (mAuthListener != null) {
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
+        Firebase_Model.get().removeAuthListener();
     }
 
     @Override
@@ -133,12 +108,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.login_signup_btn:
                 Intent intent = new Intent(LoginActivity.this, CreateAccountActivity.class);
                 startActivity(intent);
-                //createUserAccount();
                 break;
 
             case R.id.login_fb_btn:
                 Toast.makeText(getApplicationContext(), "Login with Facebook", Toast.LENGTH_SHORT);
-                //signUserOut();
                 break;
         }
     }
@@ -162,51 +135,43 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void updateStatus() {
-        TextView tvStat = (TextView)findViewById(R.id.tvSignInStatus);
-        FirebaseUser user = mAuth.getCurrentUser();
-        if (user != null) {
-            tvStat.setText("Signed in: " + user.getEmail());
+        if (Firebase_Model.get().isUserConnected()) {
+            status_TV.setText("Signed in: " + Firebase_Model.get().getEmail());
         }
         else {
-            tvStat.setText("Signed Out");
+            status_TV.setText("Signed Out");
         }
     }
 
     private void updateStatus(String stat) {
-        TextView tvStat = (TextView)findViewById(R.id.tvSignInStatus);
-        tvStat.setText(stat);
+        status_TV.setText(stat);
     }
 
     private void signUserIn() {
         if (!checkFormFields())
             return;
-
         String email = etEmail.getText().toString();
         String password = etPass.getText().toString();
 
         // TODO: sign the user in with email and password credentials
-        mAuth.signInWithEmailAndPassword(email,password)
-                .addOnCompleteListener(this,
-                        new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
-                                    // Send username
-                                    //intent.putExtra("username", something);
-                                    startActivity(intent);
-                                    Toast.makeText(LoginActivity.this, "Signed in", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                                else {
-                                    Toast.makeText(LoginActivity.this, "Sign in failed", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-
-                                updateStatus();
-                            }
-                        })
-                .addOnFailureListener(new OnFailureListener() {
+        Firebase_Model.get().getAuth().signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener(this,new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            //if(Firebase_Model.get().isUserConnected()){
+                            //    Firebase_Model.get().addUserToDataBase(new User(mUserName,mFullName,mEmail));
+                            //}
+                            Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
+                            startActivity(intent);
+                            Toast.makeText(LoginActivity.this, "Signed in", Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "Sign in failed", Toast.LENGTH_SHORT).show();
+                        }
+                        updateStatus();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
                         if (e instanceof FirebaseAuthInvalidCredentialsException) {
@@ -224,45 +189,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void signUserOut() {
         // TODO: sign the user out
-        mAuth.signOut();
+        Firebase_Model.get().getAuth().signOut();
         updateStatus();
-    }
-
-    private void createUserAccount() {
-        if (!checkFormFields())
-            return;
-
-        String email = etEmail.getText().toString();
-        String password = etPass.getText().toString();
-
-        // TODO: Create the user account
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this,
-                        new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(LoginActivity.this, "User created", Toast.LENGTH_SHORT)
-                                            .show();
-                                    updateStatus("User created");
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Account creation failed", Toast.LENGTH_SHORT)
-                                            .show();
-                                }
-                            }
-                        })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.e(TAG, e.toString());
-                        if (e instanceof FirebaseAuthUserCollisionException) {
-                            updateStatus("This email address is already in use.");
-                        }
-                        else {
-                            updateStatus(e.getLocalizedMessage());
-                        }
-                    }
-                });
     }
 }
 

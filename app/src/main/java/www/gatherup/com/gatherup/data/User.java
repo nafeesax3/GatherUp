@@ -9,113 +9,75 @@ import java.util.ArrayList;
  * Created by edwinsventura on 3/20/17.
  */
 
-public class User  implements Parcelable {
-    private int userId;
-    private String username;
-    private String fullName;
-    private String email;
-    private String passwordHash;
-    private ArrayList<User> friendList;
-    private double latitude;
-    private double longitude;
-    private ArrayList<Event> attendingEventsList;
-    private ArrayList<Event> createdEventsList;
+public class User {//implements Parcelable {
+    //private int userId;
+    private String mUsername;
+    //public String mUserID;
+    private String mFullName;
+    private String mEmail;
+    //private String passwordHash;
+    //private ArrayList<User> mFriendList;
+    //private double latitude;
+    //private double longitude;
+    //private ArrayList<Event> mAttendingEventsList;
+    //private ArrayList<Event> mCreatedEventsList;
 
 
-    public User(){
-        this("username", "fullname", "email");
-    }
+    public User(){}
 
     public User(String username, String fullName, String email) {
-        this.username = username;
-        this.fullName = fullName;
-        this.email = email;
-        userId = 0;
-        passwordHash = "passwordHash";
-        latitude = 0.0;
-        longitude = 0.0;
-        friendList = new ArrayList<>();
-        attendingEventsList = new ArrayList<>();
-        createdEventsList = new ArrayList<>();
+        this.mUsername = username;
+        this.mFullName = fullName;
+        this.mEmail = email;
+        //userId = 0;
+        //passwordHash = "passwordHash";
+        //latitude = 0.0;
+        //longitude = 0.0;
+        //mFriendList = new ArrayList<>();
+        //mAttendingEventsList = new ArrayList<>();
+        //mCreatedEventsList = new ArrayList<>();
     }
-
-    public int getUserId() {
-        return userId;
-    }
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
-
     public String getUsername() {
-        return username;
+        return mUsername;
     }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public String getFullName() {
-        return fullName;
+        return mFullName;
     }
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public String getEmail() {
+        return mEmail;
     }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
+    //public String getUserID(){ return mUserID; }
+    //public void setUserID(String userID){this.mUserID = userID;}
+/*
     public void setFriendList(ArrayList<User> friendList) {
-        this.friendList = friendList;
+        this.mFriendList = friendList;
     }
     public ArrayList<User> getFriendList() {
-        return friendList;
+        return mFriendList;
     }
 
-    public double getLatitude() {
-        return latitude;
-    }
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-    public void setEmail(String email) {
-        this.email = email;
-    }
 
     public ArrayList<Event> getAttendingEventsList() {
-        return attendingEventsList;
+        return mAttendingEventsList;
     }
     public void setAttendingEventsList(ArrayList<Event> attendingEventsList) {
-        this.attendingEventsList = attendingEventsList;
+        this.mAttendingEventsList = attendingEventsList;
     }
 
     public void addAttendingEvent(Event e){
-        attendingEventsList.add(e);
+        mAttendingEventsList.add(e);
     }
 
 
     public ArrayList<Event> getCreatedEventsList() {
-        return createdEventsList;
+        return mCreatedEventsList;
     }
     public void setCreatedEventsList(ArrayList<Event> createdEventsList) {
-        this.createdEventsList = createdEventsList;
+        this.mCreatedEventsList = createdEventsList;
     }
 
     public void addCreatedEvent(Event e){
-        createdEventsList.add(e);
+        mCreatedEventsList.add(e);
     }
 
 
@@ -126,58 +88,58 @@ public class User  implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(userId);
-        dest.writeString(username);
-        dest.writeString(fullName);
-        dest.writeString(email);
-        dest.writeString(passwordHash);
-        if (friendList == null) {
+        //dest.writeInt(userId);
+        dest.writeString(mUsername);
+        dest.writeString(mFullName);
+        dest.writeString(mEmail);
+        //dest.writeString(passwordHash);
+        if (mFriendList == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(friendList);
+            dest.writeList(mFriendList);
         }
-        dest.writeDouble(latitude);
-        dest.writeDouble(longitude);
-        if (attendingEventsList == null) {
+        //dest.writeDouble(latitude);
+        //dest.writeDouble(longitude);
+        if (mAttendingEventsList == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(attendingEventsList);
+            dest.writeList(mAttendingEventsList);
         }
-        if (createdEventsList == null) {
+        if (mCreatedEventsList == null) {
             dest.writeByte((byte) (0x00));
         } else {
             dest.writeByte((byte) (0x01));
-            dest.writeList(createdEventsList);
+            dest.writeList(mCreatedEventsList);
         }
     }
 
     protected User(Parcel in) {
-        userId = in.readInt();
-        username = in.readString();
-        fullName = in.readString();
-        email = in.readString();
-        passwordHash = in.readString();
+        //userId = in.readInt();
+        mUsername = in.readString();
+        mFullName = in.readString();
+        mEmail = in.readString();
+        //passwordHash = in.readString();
         if (in.readByte() == 0x01) {
-            friendList = new ArrayList<User>();
-            in.readList(friendList, User.class.getClassLoader());
+            mFriendList = new ArrayList<User>();
+            in.readList(mFriendList, User.class.getClassLoader());
         } else {
-            friendList = null;
+            mFriendList = null;
         }
-        latitude = in.readDouble();
-        longitude = in.readDouble();
+        //latitude = in.readDouble();
+        //longitude = in.readDouble();
         if (in.readByte() == 0x01) {
-            attendingEventsList = new ArrayList<Event>();
-            in.readList(attendingEventsList, Event.class.getClassLoader());
+            mAttendingEventsList = new ArrayList<Event>();
+            in.readList(mAttendingEventsList, Event.class.getClassLoader());
         } else {
-            attendingEventsList = null;
+            mAttendingEventsList = null;
         }
         if (in.readByte() == 0x01) {
-            createdEventsList = new ArrayList<Event>();
-            in.readList(createdEventsList, Event.class.getClassLoader());
+            mCreatedEventsList = new ArrayList<Event>();
+            in.readList(mCreatedEventsList, Event.class.getClassLoader());
         } else {
-            createdEventsList = null;
+            mCreatedEventsList = null;
         }
     }
 
@@ -193,6 +155,56 @@ public class User  implements Parcelable {
             return new User[size];
         }
     };
+
+
+
+
+   // public int getUserId() {
+        //return userId;
+   // }
+  //  public void setUserId(int userId) {
+  //      this.userId = userId;
+  //  }
+
+
+    //public void setUsername(String username) {
+    //    this.username = username;
+    //}
+
+
+    //public void setFullName(String fullName) {
+    //    this.fullName = fullName;
+    //}
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+*/
+
+/*
+    public double getLatitude() {
+        return latitude;
+    }
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
+    }
+*/
+
+    //public void setEmail(String email) {
+    //    this.email = email;
+    //}
+
+
 
 
 
