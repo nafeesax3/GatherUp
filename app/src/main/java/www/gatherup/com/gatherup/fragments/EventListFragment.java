@@ -113,7 +113,7 @@ public class EventListFragment extends Fragment {
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
                 Event event = (Event)eventListView.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), EventInfoActivity.class);
-                intent.putExtra("event", event);
+               // intent.putExtra("event", event);
                 startActivity(intent);
 
             }

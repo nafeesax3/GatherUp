@@ -20,6 +20,7 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
 
     <application
+        android:name=".GlobalAppState"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -61,38 +62,14 @@
             android:name=".HomeScreenActivity"
             android:label="@string/title_activity_home_screen"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".UserRegesteredEventListActivity"
-            android:label="@string/title_userregesteredevent_list"
-            android:parentActivityName=".HomeScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
-        </activity>
-        <activity
-            android:name=".UserRegesteredEventDetailActivity"
-            android:label="@string/title_userregesteredevent_detail"
-            android:parentActivityName=".UserRegesteredEventListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="www.gatherup.com.gatherup.UserRegesteredEventListActivity" />
-        </activity>
-        <activity
-            android:name=".UserAccountActivity"
-            android:label="@string/title_activity_user_account"
-            android:parentActivityName=".HomeScreenActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="www.gatherup.com.gatherup.HomeScreenActivity" />
-        </activity>
         <activity android:name=".activities.EventInfoActivity" />
         <activity android:name=".activities.SearchMapActivity" />
         <activity android:name=".activities.CreateEventActivity" />
         <activity android:name=".activities.MyEventsActivity" />
-        <activity android:name=".activities.UserProfileActivity"></activity>
+        <activity android:name=".activities.UserProfileActivity" />
+        <activity android:name=".activities.SearchEventActivity"></activity>
+
+
     </application>
 
 </manifest>

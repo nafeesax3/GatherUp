@@ -19,6 +19,10 @@ import android.view.MenuItem;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import www.gatherup.com.gatherup.activities.CreateEventActivity;
+import www.gatherup.com.gatherup.activities.MyEventsActivity;
+import www.gatherup.com.gatherup.activities.SearchEventActivity;
+import www.gatherup.com.gatherup.activities.UserProfileActivity;
 import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.fragments.EventListFragment;
 
@@ -51,6 +55,8 @@ public class HomeScreenActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        // Sidebar Buttons
 
 
 
@@ -110,19 +116,25 @@ public class HomeScreenActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Class menuclass = null;
 
         if (id == R.id.nav_profile) {
-
+            menuclass = UserProfileActivity.class;
         } else if (id == R.id.nav_create_events) {
-
+            menuclass = CreateEventActivity.class;
         } else if (id == R.id.nav_search_events) {
-
+            menuclass = SearchEventActivity.class;
         } else if (id == R.id.nav_my_events) {
-
+            menuclass = MyEventsActivity.class;
         } else if (id == R.id.nav_sign_out) {
-            Intent intent = new Intent(HomeScreenActivity.this, LoginActivity.class);
+            menuclass = LoginActivity.class;
+        }
+
+        if (menuclass != null) {
+            Intent intent = new Intent(HomeScreenActivity.this, menuclass);
             startActivity(intent);
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

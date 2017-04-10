@@ -138,7 +138,7 @@ public class Event implements Parcelable {
         dest.writeString(title);
         dest.writeDouble(latitude);
         dest.writeDouble(longitude);
-        dest.writeValue(owner);
+//        dest.writeValue(owner);
         dest.writeString(address);
         if (atendeesList == null) {
             dest.writeByte((byte) (0x00));
@@ -158,7 +158,7 @@ public class Event implements Parcelable {
         title = in.readString();
         latitude = in.readDouble();
         longitude = in.readDouble();
-        owner = (User) in.readValue(User.class.getClassLoader());
+      //  owner = (User) in.readValue(User.class.getClassLoader());
         address = in.readString();
         if (in.readByte() == 0x01) {
             atendeesList = new ArrayList<User>();

@@ -24,6 +24,7 @@ public class UserModel {
 
     }
     public static UserModel getUserModel(){
+
         return sUserModel;
     }
 
