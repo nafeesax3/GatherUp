@@ -61,7 +61,7 @@
             android:id="@+id/event_info_rsvp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:text="I am going"
             android:textSize="16sp" />
 
@@ -69,9 +69,16 @@
             android:id="@+id/event_info_open_map_btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="1"
             android:text="View Map"
             android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/event_info_report"
+            android:layout_width="73dp"
+            android:layout_height="wrap_content"
+            android:background="@color/colorRed"
+            android:text="Report" />
     </LinearLayout>
 
     <TextView
