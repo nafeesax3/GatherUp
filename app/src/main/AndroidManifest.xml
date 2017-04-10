@@ -91,7 +91,8 @@
         <activity android:name=".activities.EventInfoActivity" />
         <activity android:name=".activities.SearchMapActivity" />
         <activity android:name=".activities.CreateEventActivity" />
-        <activity android:name=".activities.MyEventsActivity"></activity>
+        <activity android:name=".activities.MyEventsActivity" />
+        <activity android:name=".activities.UserProfileActivity"></activity>
     </application>
 
 </manifest>
