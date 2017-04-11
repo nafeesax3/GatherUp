@@ -57,8 +57,6 @@ public class HomeScreenActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        // Sidebar Buttons
-
 
 
         // Create mock eventlist
