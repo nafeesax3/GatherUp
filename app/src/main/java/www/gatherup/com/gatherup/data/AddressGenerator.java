@@ -17,7 +17,8 @@ public class AddressGenerator {
     public static String getAddressLine(Context context, double latitude, double longitude){
         String s = "";
 
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        //Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(context);
         List<Address> addresses = null;
         try {
             addresses = geocoder.getFromLocation(latitude, longitude, 1);

@@ -25,6 +25,10 @@ public class Event implements Parcelable {
     private String category;
     private double rating;
 
+    public Event(){
+        this(null, "title", 0.0, 0.0, Calendar.getInstance(), Calendar.getInstance(), "description", "category");
+    }
+
     public Event(Context context){
         this(context, "title", 0.0, 0.0, Calendar.getInstance(), Calendar.getInstance(), "description", "category");
     }
@@ -33,7 +37,7 @@ public class Event implements Parcelable {
         this.title = title;
         this.latitude = latitude;
         this.longitude = longitude;
-        address = AddressGenerator.getAddressLine(context, latitude, longitude);
+        address = context!=null? AddressGenerator.getAddressLine(context, latitude, longitude): "No valid address";
         this.startDate = startDate;
         this.endDate = endDate;
         this.category = category;

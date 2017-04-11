@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.Calendar;
 import java.util.Locale;
 
+import www.gatherup.com.gatherup.GlobalAppState;
 import www.gatherup.com.gatherup.MapsActivity;
 import www.gatherup.com.gatherup.R;
 import www.gatherup.com.gatherup.data.Event;
@@ -25,6 +26,9 @@ public class EventInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_info);
 
         //event = (Event)getIntent().getExtras().get("event");
+
+        //TODO this is using GlobalAppState
+        event = ((GlobalAppState)getApplicationContext()).getCurrentEvent();
 
         TextView titleTv = (TextView)findViewById(R.id.event_info_title_tv);
         TextView dayTv = (TextView)findViewById(R.id.event_info_day);
@@ -40,13 +44,13 @@ public class EventInfoActivity extends AppCompatActivity {
 
         editBtn.setVisibility(View.GONE);
 
-        /*titleTv.setText(event.getTitle());
+        titleTv.setText(event.getTitle());
         dayTv.setText(event.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
         timetv.setText(event.getStartDate().get(Calendar.HOUR) + ":" + event.getStartDate().get(Calendar.MINUTE) + " " + event.getStartDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()) + " to " + event.getEndDate().get(Calendar.HOUR) + ":" + event.getEndDate().get(Calendar.MINUTE) + " " + event.getEndDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()));
         addressTv.setText(event.getAddress());
         hostedByTv.setText(event.getOwner().getFullName());
         rsvpTv.setText(event.getAtendeesList().size() + " people are going");
-        description.setText(event.getDescription());*/
+        description.setText(event.getDescription());
 
         rsvpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
