@@ -73,6 +73,10 @@ public class HomeScreenActivity extends AppCompatActivity
         eventList.add(new Event(this, "Zoo trip", 33.3, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
 
 
+        // TODO this is for trying out GlobalAppState
+        ((GlobalAppState)getApplicationContext()).setEventList((ArrayList<Event>) eventList.clone());
+
+
 
         EventListFragment allEventsListFragment = EventListFragment.newInstance(eventList);
         FragmentManager manager= getSupportFragmentManager();

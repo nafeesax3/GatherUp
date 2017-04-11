@@ -42,9 +42,9 @@
         android:textSize="30dp" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/profile_view_events_btn"
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:text="View Events" />
 </LinearLayout>

@@ -67,9 +67,8 @@
         <activity android:name=".activities.CreateEventActivity" />
         <activity android:name=".activities.MyEventsActivity" />
         <activity android:name=".activities.UserProfileActivity" />
-        <activity android:name=".activities.SearchEventActivity"></activity>
-
-
+        <activity android:name=".activities.SearchEventActivity" />
+        <activity android:name=".activities.SearchListActivity"></activity>
     </application>
 
 </manifest>

@@ -78,6 +78,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         etEmail = (EditText)findViewById(R.id.etEmailAddr);
         etPass = (EditText)findViewById(R.id.etPassword);
+
+        // TODO for testing purposes only
+        etPass.setText("testpass");
+        etEmail.setText("testuser@test.com");
     }
 
     /**

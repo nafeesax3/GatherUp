@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 
+import www.gatherup.com.gatherup.GlobalAppState;
 import www.gatherup.com.gatherup.HomeScreenActivity;
 import www.gatherup.com.gatherup.R;
 
@@ -92,6 +93,8 @@ public class EventListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         final ListView eventListView = (ListView)view.findViewById(R.id.eventlist_fragment_listview);
+        // TODO This is using GlobalAppState
+        eventArrayList = ((GlobalAppState)getContext().getApplicationContext()).getEventList();
         EventListViewAdapter adapter = new EventListViewAdapter(this.getContext(), eventArrayList);
 
         eventListView.setAdapter(adapter);
@@ -114,6 +117,8 @@ public class EventListFragment extends Fragment {
                 Event event = (Event)eventListView.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), EventInfoActivity.class);
                // intent.putExtra("event", event);
+                //TODO this is using GLobalAppState
+                ((GlobalAppState)getContext().getApplicationContext()).setCurrentEvent(event);
                 startActivity(intent);
 
             }

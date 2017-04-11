@@ -7,14 +7,14 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
+        android:id="@+id/event_list_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="All nearby events"
         android:layout_gravity="center"
-        android:textSize="20dp"
+        android:text="All nearby events"
         android:textColor="@color/colorBlack"
-        android:textStyle="bold"
-        android:id="@+id/test_text_view" />
+        android:textSize="20dp"
+        android:textStyle="bold" />
 
     <ListView
         android:layout_width="match_parent"
