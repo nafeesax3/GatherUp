@@ -16,7 +16,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/textView19"
+        android:id="@+id/username_TV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Username goes here"
@@ -33,7 +33,7 @@
         android:textAlignment="center" />
 
     <TextView
-        android:id="@+id/textView21"
+        android:id="@+id/fullname_TV"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Full name goes here"

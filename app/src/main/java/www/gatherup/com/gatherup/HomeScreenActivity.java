@@ -25,6 +25,7 @@ import www.gatherup.com.gatherup.activities.SearchEventActivity;
 import www.gatherup.com.gatherup.activities.UserProfileActivity;
 import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.fragments.EventListFragment;
+import www.gatherup.com.gatherup.models.Firebase_Model;
 
 public class HomeScreenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, EventListFragment.OnFragmentInteractionListener {
@@ -131,6 +132,7 @@ public class HomeScreenActivity extends AppCompatActivity
         }
 
         if (menuclass != null) {
+            Firebase_Model.get().getAuth().signOut();
             Intent intent = new Intent(HomeScreenActivity.this, menuclass);
             startActivity(intent);
         }

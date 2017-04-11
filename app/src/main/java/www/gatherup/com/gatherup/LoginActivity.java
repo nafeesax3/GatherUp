@@ -41,6 +41,9 @@ import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +52,7 @@ import java.util.concurrent.Executor;
 import www.gatherup.com.gatherup.activities.CreateAccountActivity;
 import www.gatherup.com.gatherup.data.User;
 import www.gatherup.com.gatherup.models.Firebase_Model;
+import www.gatherup.com.gatherup.models.UserModel;
 
 import static android.Manifest.permission.LOCATION_HARDWARE;
 import static android.Manifest.permission.READ_CONTACTS;
@@ -159,9 +163,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            //if(Firebase_Model.get().isUserConnected()){
-                            //    Firebase_Model.get().addUserToDataBase(new User(mUserName,mFullName,mEmail));
-                            //}
+                            Firebase_Model.get().setMainUser();
                             Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
                             startActivity(intent);
                             Toast.makeText(LoginActivity.this, "Signed in", Toast.LENGTH_SHORT).show();
@@ -187,10 +189,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 });
     }
 
-    private void signUserOut() {
+    /*private void signUserOut() {
         // TODO: sign the user out
         Firebase_Model.get().getAuth().signOut();
         updateStatus();
-    }
+    }*/
 }
 

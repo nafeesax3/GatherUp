@@ -58,10 +58,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         //SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
          //       .findFragmentById(R.id.map);
         //mapFragment.getMapAsync(this);
-        Bundle bundle = getIntent().getExtras();
-        Event event = (Event)bundle.get("event");
-        latitude = event.getLatitude();
-        longitude = event.getLongitude();
+        //Bundle bundle = getIntent().getExtras();
+        //Event event = (Event)bundle.get("event");
+        latitude = 0;
+        longitude = 0;
 
         if (servicesOK()) {
             setContentView(R.layout.activity_maps);

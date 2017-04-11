@@ -46,6 +46,18 @@ public class User {//implements Parcelable {
     public String getEmail() {
         return mEmail;
     }
+
+    public void setUsername(String username) {
+        mUsername = username;
+    }
+
+    public void setFullName(String fullName) {
+        mFullName = fullName;
+    }
+
+    public void setEmail(String email) {
+        mEmail = email;
+    }
     //public String getUserID(){ return mUserID; }
     //public void setUserID(String userID){this.mUserID = userID;}
 /*
