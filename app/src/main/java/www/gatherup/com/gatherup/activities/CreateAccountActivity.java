@@ -79,7 +79,7 @@ public class CreateAccountActivity extends AppCompatActivity {
             mCreate_BTN.setVisibility(View.GONE);
         }
     }
-    private void createUserAccount(String email,String password) {
+    private void createUserAccount(String email, final String password) {
         // TODO: Create the user account
         Firebase_Model.get().getAuth().createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this,
@@ -88,7 +88,7 @@ public class CreateAccountActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 if (task.isSuccessful()) {
                                     //accountCreated = true;
-                                    Firebase_Model.get().addUserToDataBase(new User(mUserName,mFullName,mEmail));
+                                    Firebase_Model.get().addUserToDataBase(new User(mUserName,mFullName,mEmail),password);
                                     Toast.makeText(CreateAccountActivity.this,"User succesfully created", Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(CreateAccountActivity.this, LoginActivity.class);
                                     startActivity(intent);

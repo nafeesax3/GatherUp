@@ -8,8 +8,14 @@ import android.widget.Button;
 
 import www.gatherup.com.gatherup.R;
 import www.gatherup.com.gatherup.data.User;
+import android.widget.TextView;
+
+import www.gatherup.com.gatherup.models.UserModel;
 
 public class UserProfileActivity extends AppCompatActivity {
+
+    private TextView username_TV;
+    private TextView fullname_TV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,5 +33,10 @@ public class UserProfileActivity extends AppCompatActivity {
         });
 
 
+        username_TV = (TextView)findViewById(R.id.username_TV);
+        fullname_TV = (TextView)findViewById(R.id.fullname_TV);
+
+        username_TV.setText(UserModel.get().getAccountName());
+        fullname_TV.setText(UserModel.get().getFullname());
     }
 }

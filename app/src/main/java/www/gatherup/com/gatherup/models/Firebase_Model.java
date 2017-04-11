@@ -5,8 +5,11 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import www.gatherup.com.gatherup.data.User;
 
@@ -56,8 +59,9 @@ public class Firebase_Model {
     }
 
     public boolean isUserConnected(){
-        mAuthUser = mAuth.getCurrentUser();
-        return mAuthUser == null;
+        if(mAuthUser == null)
+            mAuthUser = mAuth.getCurrentUser();
+        return mAuthUser != null;
     }
 
     public String getEmail(){
@@ -69,17 +73,37 @@ public class Firebase_Model {
     public FirebaseAuth getAuth(){
         return mAuth;
     }
+    /*public DatabaseReference getDatabaseRef(){
+        return mDatabase;
+    }*/
     // END Authentication Methods
 
     // START Database Methods
-    public void addUserToDataBase(User user){
+    public void addUserToDataBase(User user,String pass){
         //user.setUserID(mAuthUser.getUid());
-        mDatabase.child("users").push().setValue(user);
+        mAuth.signInWithEmailAndPassword(user.getEmail(),pass);
+        mAuthUser = mAuth.getCurrentUser();
+        mDatabase.child("users").child(mAuthUser.getUid()).setValue(user);
+        mAuthUser = null;
+        mAuth.signOut();
     }
-    public User getUser(){
+    public void setMainUser(){
+        isUserConnected();
+        mDatabase.child("users").child(getUserID())
+                .addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        User tempUser = dataSnapshot.getValue(User.class);
+                        UserModel.get().setMainUser(tempUser);
+                    }
 
-        return new User();
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("Nothing Done");
+                    }
+                });
     }
+
     // END Database Methods
 
     /// Getters ///

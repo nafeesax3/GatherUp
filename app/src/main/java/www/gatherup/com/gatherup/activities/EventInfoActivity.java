@@ -66,7 +66,7 @@ public class EventInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventInfoActivity.this, MapsActivity.class);
-                intent.putExtra("event", event);
+                //intent.putExtra("event", event);
                 startActivity(intent);
             }
         });
