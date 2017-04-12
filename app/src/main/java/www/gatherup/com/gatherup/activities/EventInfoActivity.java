@@ -40,6 +40,7 @@ public class EventInfoActivity extends AppCompatActivity {
         final Button rsvpBtn = (Button)findViewById(R.id.event_info_rsvp);
         Button mapBtn = (Button)findViewById(R.id.event_info_open_map_btn);
         Button editBtn = (Button)findViewById(R.id.event_info_edit_btn);
+        final Button reportButton = (Button)findViewById(R.id.event_info_report);
 
 
         editBtn.setVisibility(View.GONE);
@@ -58,7 +59,8 @@ public class EventInfoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"You succesfully registered", Toast.LENGTH_SHORT).show();
                 rsvpBtn.setEnabled(false);
 
-                //rsvpTv.setText(event.getAtendeesList().size()+1 + " people are going");
+                //TODO actually report event
+                rsvpTv.setText(event.getAtendeesList().size()+1 + " people are going");
             }
         });
 
@@ -70,6 +72,18 @@ public class EventInfoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        reportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                //TODO implement report to the database
+                reportButton.setEnabled(false);
+                Toast.makeText(getApplicationContext(), "Event successfully reported", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
 
     }
 }
