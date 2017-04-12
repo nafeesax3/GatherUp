@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.data.User;
 
 /**
@@ -102,6 +103,10 @@ public class Firebase_Model {
                         System.out.println("Nothing Done");
                     }
                 });
+    }
+    public void addEvent(Event e){
+        mAuthUser = mAuth.getCurrentUser();
+        mDatabase.child("events").push().setValue(e);
     }
 
     // END Database Methods
