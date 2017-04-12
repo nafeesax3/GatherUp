@@ -71,9 +71,20 @@ public class HomeScreenActivity extends AppCompatActivity
         eventList.add(new Event(this, "Watch the Packers win ", 43.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
         eventList.add(new Event(this, "Zoo trip", 33.3, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
 
+        // Create mock category list
+        GlobalAppState appState = (GlobalAppState)getApplicationContext();
+        appState.getCategories().add("Any");
+        appState.getCategories().add("Food");
+        appState.getCategories().add("Sports");
+        appState.getCategories().add("Gathering");
+        appState.getCategories().add("Music");
+        appState.getCategories().add("Academics");
+        appState.getCategories().add("Games");
+
+
 
         // TODO this is for trying out GlobalAppState
-        ((GlobalAppState)getApplicationContext()).setEventList((ArrayList<Event>) eventList.clone());
+        appState.setEventList((ArrayList<Event>) eventList.clone());
 
 
 

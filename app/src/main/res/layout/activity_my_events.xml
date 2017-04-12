@@ -14,14 +14,14 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/my_events_attenting"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="I am Attending" />
 
         <Button
-            android:id="@+id/button7"
+            android:id="@+id/my_events_created"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -30,6 +30,7 @@
     </LinearLayout>
 
     <FrameLayout
+        android:id="@+id/my_events_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1">
