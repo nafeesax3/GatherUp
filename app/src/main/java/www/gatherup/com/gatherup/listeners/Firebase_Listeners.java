@@ -5,7 +5,7 @@ package www.gatherup.com.gatherup.listeners;
  */
 
 public class Firebase_Listeners {
-    // Another User Joined Event
-    // Event Changed
+    // Another User Joined DetailedEvent
+    // DetailedEvent Changed
 
 }

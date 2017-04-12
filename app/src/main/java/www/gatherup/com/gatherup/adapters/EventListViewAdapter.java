@@ -16,23 +16,22 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-import www.gatherup.com.gatherup.data.AddressGenerator;
-import www.gatherup.com.gatherup.data.Event;
+import www.gatherup.com.gatherup.data.DetailedEvent;
 
 /**
  * Created by edwinsventura on 3/25/17.
  */
 
-public class EventListViewAdapter extends ArrayAdapter<Event> {
+public class EventListViewAdapter extends ArrayAdapter<DetailedEvent> {
 
-    public EventListViewAdapter(Context context, ArrayList<Event> events){
-        super(context, 0, events);
+    public EventListViewAdapter(Context context, ArrayList<DetailedEvent> detailedEvents){
+        super(context, 0, detailedEvents);
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Event event = getItem(position);
+        DetailedEvent detailedEvent = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
@@ -47,14 +46,14 @@ public class EventListViewAdapter extends ArrayAdapter<Event> {
         TextView category = (TextView)convertView.findViewById(R.id.item_event_category);
         TextView numberOfPeople = (TextView)convertView.findViewById(R.id.item_event_people);
 
-        shortDay.setText(event.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()) );
-        dayNumber.setText(String.valueOf(event.getEndDate().get(Calendar.DAY_OF_MONTH)) );
-        title.setText(event.getTitle());
-        //location.setText(AddressGenerator.getAddressLine(getContext(), event.getLatitude(), event.getLongitude()));
-        location.setText(event.getAddress());
-        dayAndTime.setText(event.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + " " + event.getStartDate().get(Calendar.HOUR) + ":" + event.getStartDate().get(Calendar.MINUTE) + " " + event.getStartDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()));
-        category.setText(event.getCategory());
-        numberOfPeople.setText("RSVP: " + String.valueOf( event.getAtendeesList().size()));
+        shortDay.setText(detailedEvent.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.SHORT, Locale.getDefault()) );
+        dayNumber.setText(String.valueOf(detailedEvent.getEndDate().get(Calendar.DAY_OF_MONTH)) );
+        title.setText(detailedEvent.getTitle());
+        //location.setText(AddressGenerator.getAddressLine(getContext(), detailedEvent.getLatitude(), detailedEvent.getLongitude()));
+        location.setText(detailedEvent.getAddress());
+        dayAndTime.setText(detailedEvent.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + " " + detailedEvent.getStartDate().get(Calendar.HOUR) + ":" + detailedEvent.getStartDate().get(Calendar.MINUTE) + " " + detailedEvent.getStartDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()));
+        category.setText(detailedEvent.getCategory());
+        numberOfPeople.setText("RSVP: " + String.valueOf( detailedEvent.getAtendeesList().size()));
 
 
         return convertView;

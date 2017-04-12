@@ -14,14 +14,13 @@ import android.widget.ListView;
 
 
 import www.gatherup.com.gatherup.GlobalAppState;
-import www.gatherup.com.gatherup.HomeScreenActivity;
 import www.gatherup.com.gatherup.R;
 
 import java.util.ArrayList;
 
 import www.gatherup.com.gatherup.activities.EventInfoActivity;
 import www.gatherup.com.gatherup.adapters.EventListViewAdapter;
-import www.gatherup.com.gatherup.data.Event;
+import www.gatherup.com.gatherup.data.DetailedEvent;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,11 +33,11 @@ import www.gatherup.com.gatherup.data.Event;
 public class EventListFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM_EVENTLIST = "eventArrayList";
+    private static final String ARG_PARAM_EVENTLIST = "mDetailedEventArrayList";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
-    private ArrayList<Event> eventArrayList;
+    private ArrayList<DetailedEvent> mDetailedEventArrayList;
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,10 +52,10 @@ public class EventListFragment extends Fragment {
      * @return A new instance of fragment EventListFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static EventListFragment newInstance(ArrayList<Event> eventArrayList) {
+    public static EventListFragment newInstance(ArrayList<DetailedEvent> detailedEventArrayList) {
         EventListFragment fragment = new EventListFragment();
         Bundle args = new Bundle();
-        args.putParcelableArrayList(ARG_PARAM_EVENTLIST, eventArrayList);
+        args.putParcelableArrayList(ARG_PARAM_EVENTLIST, detailedEventArrayList);
         fragment.setArguments(args);
         return fragment;
     }
@@ -65,7 +64,7 @@ public class EventListFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            eventArrayList = getArguments().getParcelableArrayList(ARG_PARAM_EVENTLIST);
+            mDetailedEventArrayList = getArguments().getParcelableArrayList(ARG_PARAM_EVENTLIST);
 
         }
 
@@ -94,8 +93,8 @@ public class EventListFragment extends Fragment {
 
         final ListView eventListView = (ListView)view.findViewById(R.id.eventlist_fragment_listview);
         // TODO This is using GlobalAppState
-        eventArrayList = ((GlobalAppState)getContext().getApplicationContext()).getEventList();
-        EventListViewAdapter adapter = new EventListViewAdapter(this.getContext(), eventArrayList);
+        mDetailedEventArrayList = ((GlobalAppState)getContext().getApplicationContext()).getDetailedEventList();
+        EventListViewAdapter adapter = new EventListViewAdapter(this.getContext(), mDetailedEventArrayList);
 
         eventListView.setAdapter(adapter);
 
@@ -114,11 +113,11 @@ public class EventListFragment extends Fragment {
         eventListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Event event = (Event)eventListView.getItemAtPosition(position);
+                DetailedEvent detailedEvent = (DetailedEvent)eventListView.getItemAtPosition(position);
                 Intent intent = new Intent(getActivity(), EventInfoActivity.class);
-               // intent.putExtra("event", event);
+               // intent.putExtra("detailedEvent", detailedEvent);
                 //TODO this is using GLobalAppState
-                ((GlobalAppState)getContext().getApplicationContext()).setCurrentEvent(event);
+                ((GlobalAppState)getContext().getApplicationContext()).setCurrentDetailedEvent(detailedEvent);
                 startActivity(intent);
 
             }

@@ -11,6 +11,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import www.gatherup.com.gatherup.data.DetailedEvent;
 import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.data.User;
 
@@ -106,7 +107,13 @@ public class Firebase_Model {
     }
     public void addEvent(Event e){
         mAuthUser = mAuth.getCurrentUser();
-        mDatabase.child("events").push().setValue(e);
+        String key = mDatabase.child("events").push().getKey();
+        mDatabase.child("events").child(key).setValue(e);
+        //mDatabase.child('members')
+        // push event to database using that key
+        // add reference to that event key with user
+        //
+                    //.setValue(e);
     }
 
     // END Database Methods
@@ -127,11 +134,11 @@ public class Firebase_Model {
             // Create New User On Database
             // Create User Profile
             // Create New Friend OR Follow Another User
-            // Create Event
+            // Create DetailedEvent
                 // Add Filters
                 // Add Location
                 // Add Category
-                // Add Event Info
+                // Add DetailedEvent Info
                 // Add Rating
                 // Add Attendance
                     // Pending Invites
@@ -139,26 +146,26 @@ public class Firebase_Model {
 
         // Deletion
             // Remove Friend / Stop Following Another User
-            // Delete Event
+            // Delete DetailedEvent
                 // Delete Filters
                 // Delete Location
                 // Delete Category
-                // Delete Event Info
+                // Delete DetailedEvent Info
                 // Delete Rating
                 // Delete Attendance
                     // Pending Invites
                     // Going
-            // Remove User From Event
-            // Remove An Event Filter
+            // Remove User From DetailedEvent
+            // Remove An DetailedEvent Filter
             // Delete Account
 
         // Update
-            // Change Event
+            // Change DetailedEvent
                 // Info
                 // Location
                 // Add Filters
                 // Category
-                // Your Rating Of Event
+                // Your Rating Of DetailedEvent
             // Change Profile Info
             // Change Account
                 // Email
@@ -176,13 +183,13 @@ public class Firebase_Model {
                 // Location
                 // Filters
                 // Category
-                // Ratings of Event
+                // Ratings of DetailedEvent
             // Fetch Events By Location
                 // Info
                 // Location
                 // Filters
                 // Category
-                // Ratings of Event
+                // Ratings of DetailedEvent
             //
 
 }

@@ -19,8 +19,8 @@ public class User {//implements Parcelable {
     //private ArrayList<User> mFriendList;
     //private double latitude;
     //private double longitude;
-    //private ArrayList<Event> mAttendingEventsList;
-    //private ArrayList<Event> mCreatedEventsList;
+    //private ArrayList<DetailedEvent> mAttendingEventsList;
+    //private ArrayList<DetailedEvent> mCreatedEventsList;
 
 
     public User(){}
@@ -69,26 +69,26 @@ public class User {//implements Parcelable {
     }
 
 
-    public ArrayList<Event> getAttendingEventsList() {
+    public ArrayList<DetailedEvent> getAttendingEventsList() {
         return mAttendingEventsList;
     }
-    public void setAttendingEventsList(ArrayList<Event> attendingEventsList) {
+    public void setAttendingEventsList(ArrayList<DetailedEvent> attendingEventsList) {
         this.mAttendingEventsList = attendingEventsList;
     }
 
-    public void addAttendingEvent(Event e){
+    public void addAttendingEvent(DetailedEvent e){
         mAttendingEventsList.add(e);
     }
 
 
-    public ArrayList<Event> getCreatedEventsList() {
+    public ArrayList<DetailedEvent> getCreatedEventsList() {
         return mCreatedEventsList;
     }
-    public void setCreatedEventsList(ArrayList<Event> createdEventsList) {
+    public void setCreatedEventsList(ArrayList<DetailedEvent> createdEventsList) {
         this.mCreatedEventsList = createdEventsList;
     }
 
-    public void addCreatedEvent(Event e){
+    public void addCreatedEvent(DetailedEvent e){
         mCreatedEventsList.add(e);
     }
 
@@ -142,14 +142,14 @@ public class User {//implements Parcelable {
         //latitude = in.readDouble();
         //longitude = in.readDouble();
         if (in.readByte() == 0x01) {
-            mAttendingEventsList = new ArrayList<Event>();
-            in.readList(mAttendingEventsList, Event.class.getClassLoader());
+            mAttendingEventsList = new ArrayList<DetailedEvent>();
+            in.readList(mAttendingEventsList, DetailedEvent.class.getClassLoader());
         } else {
             mAttendingEventsList = null;
         }
         if (in.readByte() == 0x01) {
-            mCreatedEventsList = new ArrayList<Event>();
-            in.readList(mCreatedEventsList, Event.class.getClassLoader());
+            mCreatedEventsList = new ArrayList<DetailedEvent>();
+            in.readList(mCreatedEventsList, DetailedEvent.class.getClassLoader());
         } else {
             mCreatedEventsList = null;
         }

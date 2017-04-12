@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.QuickContactBadge;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,20 +14,20 @@ import java.util.Locale;
 import www.gatherup.com.gatherup.GlobalAppState;
 import www.gatherup.com.gatherup.MapsActivity;
 import www.gatherup.com.gatherup.R;
-import www.gatherup.com.gatherup.data.Event;
+import www.gatherup.com.gatherup.data.DetailedEvent;
 
 public class EventInfoActivity extends AppCompatActivity {
-    Event event;
+    DetailedEvent mDetailedEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_info);
 
-        //event = (Event)getIntent().getExtras().get("event");
+        //mDetailedEvent = (DetailedEvent)getIntent().getExtras().get("mDetailedEvent");
 
         //TODO this is using GlobalAppState
-        event = ((GlobalAppState)getApplicationContext()).getCurrentEvent();
+        mDetailedEvent = ((GlobalAppState)getApplicationContext()).getCurrentDetailedEvent();
 
         TextView titleTv = (TextView)findViewById(R.id.event_info_title_tv);
         TextView dayTv = (TextView)findViewById(R.id.event_info_day);
@@ -45,13 +44,13 @@ public class EventInfoActivity extends AppCompatActivity {
 
         editBtn.setVisibility(View.GONE);
 
-        titleTv.setText(event.getTitle());
-        dayTv.setText(event.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
-        timetv.setText(event.getStartDate().get(Calendar.HOUR) + ":" + event.getStartDate().get(Calendar.MINUTE) + " " + event.getStartDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()) + " to " + event.getEndDate().get(Calendar.HOUR) + ":" + event.getEndDate().get(Calendar.MINUTE) + " " + event.getEndDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()));
-        addressTv.setText(event.getAddress());
-        hostedByTv.setText(event.getOwner().getFullName());
-        rsvpTv.setText(event.getAtendeesList().size() + " people are going");
-        description.setText(event.getDescription());
+        titleTv.setText(mDetailedEvent.getTitle());
+        dayTv.setText(mDetailedEvent.getStartDate().getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()));
+        timetv.setText(mDetailedEvent.getStartDate().get(Calendar.HOUR) + ":" + mDetailedEvent.getStartDate().get(Calendar.MINUTE) + " " + mDetailedEvent.getStartDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()) + " to " + mDetailedEvent.getEndDate().get(Calendar.HOUR) + ":" + mDetailedEvent.getEndDate().get(Calendar.MINUTE) + " " + mDetailedEvent.getEndDate().getDisplayName(Calendar.AM_PM, Calendar.SHORT, Locale.getDefault()));
+        addressTv.setText(mDetailedEvent.getAddress());
+        hostedByTv.setText(mDetailedEvent.getOwner().getFullName());
+        rsvpTv.setText(mDetailedEvent.getAtendeesList().size() + " people are going");
+        description.setText(mDetailedEvent.getDescription());
 
         rsvpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,8 +58,8 @@ public class EventInfoActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(),"You succesfully registered", Toast.LENGTH_SHORT).show();
                 rsvpBtn.setEnabled(false);
 
-                //TODO actually report event
-                rsvpTv.setText(event.getAtendeesList().size()+1 + " people are going");
+                //TODO actually report mDetailedEvent
+                rsvpTv.setText(mDetailedEvent.getAtendeesList().size()+1 + " people are going");
             }
         });
 
@@ -68,7 +67,7 @@ public class EventInfoActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(EventInfoActivity.this, MapsActivity.class);
-                //intent.putExtra("event", event);
+                //intent.putExtra("mDetailedEvent", mDetailedEvent);
                 startActivity(intent);
             }
         });
@@ -79,7 +78,7 @@ public class EventInfoActivity extends AppCompatActivity {
 
                 //TODO implement report to the database
                 reportButton.setEnabled(false);
-                Toast.makeText(getApplicationContext(), "Event successfully reported", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "DetailedEvent successfully reported", Toast.LENGTH_SHORT).show();
             }
         });
 

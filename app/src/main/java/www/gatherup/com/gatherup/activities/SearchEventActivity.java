@@ -20,7 +20,7 @@ import java.util.Iterator;
 
 import www.gatherup.com.gatherup.GlobalAppState;
 import www.gatherup.com.gatherup.R;
-import www.gatherup.com.gatherup.data.Event;
+import www.gatherup.com.gatherup.data.DetailedEvent;
 
 public class SearchEventActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener{
 
@@ -107,42 +107,42 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
 
     private void filter(){
         GlobalAppState appState = (GlobalAppState)getApplicationContext();
-        ArrayList<Event> events;
+        ArrayList<DetailedEvent> detailedEvents;
         if (radiusFilter > 0 ){
-            events = (ArrayList<Event>) appState.getNearByEvents(40.7525, -73.4287, radiusFilter).clone();
+            detailedEvents = (ArrayList<DetailedEvent>) appState.getNearByEvents(40.7525, -73.4287, radiusFilter).clone();
         }
         else {
-            events = (ArrayList<Event>) appState.getEventList().clone();
+            detailedEvents = (ArrayList<DetailedEvent>) appState.getDetailedEventList().clone();
         }
 
         int dateTvLength = dateTv.getText().length();
 
-        for (Iterator<Event> it = events.iterator(); it.hasNext();){
-            Event event = it.next();
+        for (Iterator<DetailedEvent> it = detailedEvents.iterator(); it.hasNext();){
+            DetailedEvent detailedEvent = it.next();
             if (dateTvLength != 0){
-                if (event.getStartDate().get(Calendar.YEAR )!= dateFilter.get(Calendar.YEAR) ||
-                        event.getStartDate().get(Calendar.MONTH )!= dateFilter.get(Calendar.MONTH) ||
-                        event.getStartDate().get(Calendar.DAY_OF_MONTH )!= dateFilter.get(Calendar.DAY_OF_MONTH)){
+                if (detailedEvent.getStartDate().get(Calendar.YEAR )!= dateFilter.get(Calendar.YEAR) ||
+                        detailedEvent.getStartDate().get(Calendar.MONTH )!= dateFilter.get(Calendar.MONTH) ||
+                        detailedEvent.getStartDate().get(Calendar.DAY_OF_MONTH )!= dateFilter.get(Calendar.DAY_OF_MONTH)){
                     it.remove();
                     continue;
                 }
             }
             if (keywordFilter.length() != 0){
-                if (!event.getTitle().contains(keywordFilter)){
+                if (!detailedEvent.getTitle().contains(keywordFilter)){
                     it.remove();
                     continue;
                 }
             }
 
             if (categoryFilter != "Any"){
-                if (!event.getCategory().equals(categoryFilter)){
+                if (!detailedEvent.getCategory().equals(categoryFilter)){
                     it.remove();
                     continue;
                 }
             }
         }
 
-        appState.setFilteredEvents(events);
+        appState.setFilteredDetailedEvents(detailedEvents);
     }
 
     @Override

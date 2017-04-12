@@ -2,17 +2,10 @@ package www.gatherup.com.gatherup;
 
 import android.app.Dialog;
 import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
-import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -27,11 +20,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
-import java.io.IOException;
-import java.util.List;
-
-import www.gatherup.com.gatherup.data.Event;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback{
 
@@ -61,11 +49,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         GlobalAppState appState = (GlobalAppState)getApplicationContext();
 
-        latitude = appState.getCurrentEvent().getLatitude();
-        longitude = appState.getCurrentEvent().getLongitude();
+        latitude = appState.getCurrentDetailedEvent().getLatitude();
+        longitude = appState.getCurrentDetailedEvent().getLongitude();
 
         //Bundle bundle = getIntent().getExtras();
-        //Event event = (Event)bundle.get("event");
+        //DetailedEvent event = (DetailedEvent)bundle.get("event");
 
         //latitude = 0;
         //longitude = 0;
@@ -101,7 +89,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
         // Add a marker in Sydney and move the camera
         LatLng eventLoc = new LatLng(latitude, longitude);
-        mMap.addMarker(new MarkerOptions().position(eventLoc).title("Event Marker"));
+        mMap.addMarker(new MarkerOptions().position(eventLoc).title("DetailedEvent Marker"));
         CameraUpdate center = CameraUpdateFactory.newLatLng(eventLoc);
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(12);
 

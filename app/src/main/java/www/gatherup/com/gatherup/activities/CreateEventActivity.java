@@ -51,6 +51,7 @@ public class CreateEventActivity extends AppCompatActivity {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // send mDetailedEvent to database
                 Intent intent = new Intent(CreateEventActivity.this, HomeScreenActivity.class);
                 startActivity(intent);
             }

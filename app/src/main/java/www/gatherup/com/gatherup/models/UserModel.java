@@ -3,8 +3,8 @@ package www.gatherup.com.gatherup.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import www.gatherup.com.gatherup.data.DetailedEvent;
 import www.gatherup.com.gatherup.data.User;
-import www.gatherup.com.gatherup.data.Event;
 
 /**
  * Created by Matthew Luce on 4/9/2017.
@@ -12,8 +12,8 @@ import www.gatherup.com.gatherup.data.Event;
 
 public class UserModel {
 
-    private List<Event> mRegisteredEvents = new ArrayList<>();
-    private List<Event> mEvents = new ArrayList<>();
+    private List<DetailedEvent> mRegisteredDetailedEvents = new ArrayList<>();
+    private List<DetailedEvent> mDetailedEvents = new ArrayList<>();
     private List<User> mFriends = new ArrayList<>();
     private String mAccountName;
     //private String mAlias;
@@ -29,20 +29,20 @@ public class UserModel {
         return sUserModel;
     }
 
-    public List<Event> getRegisteredEvents() {
-        return mRegisteredEvents;
+    public List<DetailedEvent> getRegisteredDetailedEvents() {
+        return mRegisteredDetailedEvents;
     }
 
-    public void addRegisteredEvents(Event registeredEvent) {
-        mRegisteredEvents.add(registeredEvent);
+    public void addRegisteredEvents(DetailedEvent registeredDetailedEvent) {
+        mRegisteredDetailedEvents.add(registeredDetailedEvent);
     }
 
-    public List<Event> getEvents() {
-        return mEvents;
+    public List<DetailedEvent> getDetailedEvents() {
+        return mDetailedEvents;
     }
 
-    public void addEvents(Event aEvent) {
-        mEvents.add(aEvent);
+    public void addEvents(DetailedEvent aDetailedEvent) {
+        mDetailedEvents.add(aDetailedEvent);
     }
 
     public List<User> getFriends() {

@@ -23,14 +23,14 @@ import www.gatherup.com.gatherup.activities.CreateEventActivity;
 import www.gatherup.com.gatherup.activities.MyEventsActivity;
 import www.gatherup.com.gatherup.activities.SearchEventActivity;
 import www.gatherup.com.gatherup.activities.UserProfileActivity;
-import www.gatherup.com.gatherup.data.Event;
+import www.gatherup.com.gatherup.data.DetailedEvent;
 import www.gatherup.com.gatherup.fragments.EventListFragment;
 import www.gatherup.com.gatherup.models.Firebase_Model;
 
 public class HomeScreenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, EventListFragment.OnFragmentInteractionListener {
 
-    ArrayList<Event> eventList;
+    ArrayList<DetailedEvent> mDetailedEventList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +60,16 @@ public class HomeScreenActivity extends AppCompatActivity
 
 
         // Create mock eventlist
-        eventList = new ArrayList<>();
-        eventList.add(new Event(this, "Get together to study Math", 40.7493182, -73.4250478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
-        eventList.add(new Event(this, "D&D Friday night", 40.7495182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
-        eventList.add(new Event(this, "Looking for lost cat", 40.7483182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
-        eventList.add(new Event(this, "Programming tutoring session", 40.7490182, -73.4200478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
-        eventList.add(new Event(this, "FSC LASSO Dance Night (Students only)", 40.7493442, -73.4234478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
-        eventList.add(new Event(this, "Hike through Bethpage park", 40.7493456, -73.4250000, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
-        eventList.add(new Event(this, "Get together to study Chemistry", 40.7493455, -73.4250111, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
-        eventList.add(new Event(this, "Watch the Packers win ", 43.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
-        eventList.add(new Event(this, "Zoo trip", 33.3, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
+        mDetailedEventList = new ArrayList<>();
+        mDetailedEventList.add(new DetailedEvent(this, "Get together to study Math", 40.7493182, -73.4250478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        mDetailedEventList.add(new DetailedEvent(this, "D&D Friday night", 40.7495182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
+        mDetailedEventList.add(new DetailedEvent(this, "Looking for lost cat", 40.7483182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
+        mDetailedEventList.add(new DetailedEvent(this, "Programming tutoring session", 40.7490182, -73.4200478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        mDetailedEventList.add(new DetailedEvent(this, "FSC LASSO Dance Night (Students only)", 40.7493442, -73.4234478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
+        mDetailedEventList.add(new DetailedEvent(this, "Hike through Bethpage park", 40.7493456, -73.4250000, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
+        mDetailedEventList.add(new DetailedEvent(this, "Get together to study Chemistry", 40.7493455, -73.4250111, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        mDetailedEventList.add(new DetailedEvent(this, "Watch the Packers win ", 43.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
+        mDetailedEventList.add(new DetailedEvent(this, "Zoo trip", 33.3, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
 
         // Create mock category list
         GlobalAppState appState = (GlobalAppState)getApplicationContext();
@@ -84,11 +84,11 @@ public class HomeScreenActivity extends AppCompatActivity
 
 
         // TODO this is for trying out GlobalAppState
-        appState.setEventList((ArrayList<Event>) eventList.clone());
+        appState.setDetailedEventList((ArrayList<DetailedEvent>) mDetailedEventList.clone());
 
 
 
-        EventListFragment allEventsListFragment = EventListFragment.newInstance(eventList);
+        EventListFragment allEventsListFragment = EventListFragment.newInstance(mDetailedEventList);
         FragmentManager manager= getSupportFragmentManager();
         manager.beginTransaction().replace(R.id.content_home, allEventsListFragment).commit();
     }

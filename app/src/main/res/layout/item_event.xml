@@ -36,7 +36,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:text="Title of the event"
+            android:text="Title of the detailedEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -44,7 +44,7 @@
             android:id="@+id/item_event_title" />
 
         <TextView
-            android:text="Location of the event"
+            android:text="Location of the detailedEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="16dp"
@@ -59,7 +59,7 @@
             android:id="@+id/item_event_date" />
 
         <TextView
-            android:text="Category of the event"
+            android:text="Category of the detailedEvent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/item_event_category" />
