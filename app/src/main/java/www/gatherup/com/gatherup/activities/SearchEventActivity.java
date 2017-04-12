@@ -74,6 +74,7 @@ public class SearchEventActivity extends AppCompatActivity implements DatePicker
                     radiusFilter = Double.valueOf(radiusEdit.getText().toString());
                 filter();
 
+
                 // TODO move to list activity/fragment
                 Intent intent = new Intent(SearchEventActivity.this, SearchListActivity.class);
                 startActivity(intent);

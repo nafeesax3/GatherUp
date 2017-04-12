@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutCompat;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -23,6 +25,7 @@ import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+import www.gatherup.com.gatherup.GlobalAppState;
 import www.gatherup.com.gatherup.HomeScreenActivity;
 import www.gatherup.com.gatherup.R;
 import www.gatherup.com.gatherup.models.UserModel;
@@ -37,6 +40,8 @@ public class CreateEventActivity extends AppCompatActivity {
     private Calendar mCalendar;
     private DatePicker mDatePicker;
     private int mYear, mMonth,mDay,mHour,mMin;
+    private String eventCategory;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,11 @@ public class CreateEventActivity extends AppCompatActivity {
         title_ET = (TextView)findViewById(R.id.title_ET);
         description_ET = (TextView)findViewById(R.id.description_ET);
         category_Spin = (Spinner)findViewById(R.id.category_Spin);
+        date_ET = (EditText) findViewById(R.id.date_ET);
+        startTime_ET = (EditText) findViewById(R.id.startTime_ET);
+
+        category_Spin.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, ((GlobalAppState)getApplicationContext()).getCategories()));
+
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +66,7 @@ public class CreateEventActivity extends AppCompatActivity {
             }
         });
 
-        date_ET = (EditText) findViewById(R.id.date_ET);
+
         date_ET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -68,7 +78,7 @@ public class CreateEventActivity extends AppCompatActivity {
                 }
             }
         });
-        startTime_ET = (EditText) findViewById(R.id.startTime_ET);
+
         startTime_ET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
@@ -79,6 +89,20 @@ public class CreateEventActivity extends AppCompatActivity {
 
                     setTime(v);
                 }
+            }
+        });
+
+        category_Spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                eventCategory = (String)adapterView.getItemAtPosition(i);
+                //Toast.makeText(getApplicationContext(), categoryFilter + " selected", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
 
