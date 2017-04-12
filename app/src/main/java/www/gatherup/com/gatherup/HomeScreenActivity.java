@@ -78,13 +78,17 @@ public class HomeScreenActivity extends AppCompatActivity
         appState.getCategories().add("Sports");
         appState.getCategories().add("Gathering");
         appState.getCategories().add("Music");
-        appState.getCategories().add("Academics");
+        appState.getCategories().add("Learning");
         appState.getCategories().add("Games");
 
 
 
         // TODO this is for trying out GlobalAppState
+
+        //appState.setDetailedEventList((ArrayList<DetailedEvent>) mDetailedEventList.clone());
         appState.setDetailedEventList((ArrayList<DetailedEvent>) mDetailedEventList.clone());
+        appState.setFilteredDetailedEvents(appState.getDetailedEventList());
+
 
 
 
