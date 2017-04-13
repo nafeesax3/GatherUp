@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
-import android.view.View;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,20 +14,25 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 
 import www.gatherup.com.gatherup.activities.CreateEventActivity;
 import www.gatherup.com.gatherup.activities.MyEventsActivity;
 import www.gatherup.com.gatherup.activities.SearchEventActivity;
 import www.gatherup.com.gatherup.activities.UserProfileActivity;
 import www.gatherup.com.gatherup.data.DetailedEvent;
+import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.fragments.EventListFragment;
 import www.gatherup.com.gatherup.models.Firebase_Model;
+import www.gatherup.com.gatherup.models.UserModel;
 
 public class HomeScreenActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, EventListFragment.OnFragmentInteractionListener {
+
+    private static final String TAG = "NewPostActivity";
+
 
     ArrayList<DetailedEvent> mDetailedEventList;
 
@@ -58,10 +62,17 @@ public class HomeScreenActivity extends AppCompatActivity
         navigationView.setNavigationItemSelectedListener(this);
 
 
-
         // Create mock eventlist
         mDetailedEventList = new ArrayList<>();
-        mDetailedEventList.add(new DetailedEvent(this, "Get together to study Math", 40.7493182, -73.4250478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
+        if(UserModel.get().getEvents().size()>0){
+            for(Event e : UserModel.get().getEvents()){
+                mDetailedEventList.add(new DetailedEvent(e));
+            }
+        }
+
+        //mDetailedEventList.add(new DetailedEvent(UserModel.get().getEvents().get(0)));
+                //
+        /*mDetailedEventList.add(new DetailedEvent(this, "Get together to study Math", 40.7493182, -73.4250478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
         mDetailedEventList.add(new DetailedEvent(this, "D&D Friday night", 40.7495182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
         mDetailedEventList.add(new DetailedEvent(this, "Looking for lost cat", 40.7483182, -73.4230478, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
         mDetailedEventList.add(new DetailedEvent(this, "Programming tutoring session", 40.7490182, -73.4200478, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
@@ -70,7 +81,7 @@ public class HomeScreenActivity extends AppCompatActivity
         mDetailedEventList.add(new DetailedEvent(this, "Get together to study Chemistry", 40.7493455, -73.4250111, Calendar.getInstance(), Calendar.getInstance(), "Let's get together in the Library to get ready for the MTH390 Test", "Learning"));
         mDetailedEventList.add(new DetailedEvent(this, "Watch the Packers win ", 43.4, 40.0, Calendar.getInstance(), Calendar.getInstance(), "Friday night is game night. Everyone is invited to come and play D&D. Newcomers are welcome.", "Games"));
         mDetailedEventList.add(new DetailedEvent(this, "Zoo trip", 33.3, 41.0, Calendar.getInstance(), Calendar.getInstance(), "Whiskers, my little kitten is lost since yesterday, I am organizing a group to look for him. We'll be walking aroud the neighborhood for 2 hours", "Gathering"));
-
+*/
         // Create mock category list
         GlobalAppState appState = (GlobalAppState)getApplicationContext();
         appState.getCategories().add("Any");
@@ -165,4 +176,5 @@ public class HomeScreenActivity extends AppCompatActivity
     public void onFragmentInteraction(Uri uri) {
 
     }
+
 }

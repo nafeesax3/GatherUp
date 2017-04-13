@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +23,10 @@ import www.gatherup.com.gatherup.data.User;
 public class Firebase_Model {
     private final String TAG = "FB_SIGNIN";
     private DatabaseReference mDatabase;
+    private DatabaseReference mPostReference;
 
     private FirebaseAuth mAuth;
+
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mAuthUser;
     private static final Firebase_Model sFirebase_model = new Firebase_Model();
@@ -33,7 +36,9 @@ public class Firebase_Model {
     }
     private Firebase_Model(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
         mAuth = FirebaseAuth.getInstance();
+
 
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -63,6 +68,8 @@ public class Firebase_Model {
     public boolean isUserConnected(){
         if(mAuthUser == null)
             mAuthUser = mAuth.getCurrentUser();
+
+
         return mAuthUser != null;
     }
 
@@ -86,13 +93,13 @@ public class Firebase_Model {
         mAuth.signInWithEmailAndPassword(user.getEmail(),pass);
         mAuthUser = mAuth.getCurrentUser();
         mDatabase.child("users").child(mAuthUser.getUid()).setValue(user);
-        mAuthUser = null;
+        //mAuthUser = null;
         mAuth.signOut();
     }
     public void setMainUser(){
         isUserConnected();
         mDatabase.child("users").child(getUserID())
-                .addValueEventListener(new ValueEventListener() {
+                .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         User tempUser = dataSnapshot.getValue(User.class);
@@ -104,11 +111,56 @@ public class Firebase_Model {
                         System.out.println("Nothing Done");
                     }
                 });
+
     }
+
+    public void setRegisteredEventListener() {
+        mDatabase.child("users").child(mAuthUser.getUid()).child("events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
+                    //User u = postSnapshot.getValue(User.class);
+                    Firebase_Model.get().findEventByID(postSnapshot.getKey());
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void setAllEventListener() {
+
+        mDatabase.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for(DataSnapshot child : children){
+                    Event e = child.getValue(Event.class);
+                    UserModel.get().addEvent(e);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("Nothing Done");
+            }
+        });
+    }
+
     public void addEvent(Event e){
-        mAuthUser = mAuth.getCurrentUser();
+        // Get Unique Key For Event
+        //mAuthUser = mAuth.getCurrentUser();
         String key = mDatabase.child("events").push().getKey();
-        mDatabase.child("events").child(key).setValue(e);
+        // Add Extra Attributes to Event
+        //e.addRegisteredUser(mAuthUser.getUid());
+        e.setCreator(mAuthUser.getUid());
+        // Send Event To Database
+        mDatabase.child("events").push().setValue(e);
+        // Add Event To User Who Built Event
+        mDatabase.child("rsvp").child("event_users").child(key).child(mAuthUser.getUid()).setValue(true);
+        mDatabase.child("rsvp").child("user_events").child(mAuthUser.getUid()).child(key).setValue(true);
+
         //mDatabase.child('members')
         // push event to database using that key
         // add reference to that event key with user
@@ -116,6 +168,37 @@ public class Firebase_Model {
                     //.setValue(e);
     }
 
+    public void findEventByID(String key){
+        mPostReference = FirebaseDatabase.getInstance().getReference()
+                .child("events").child(key);
+        mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserModel.get().addEvent(dataSnapshot.getValue(Event.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+        //mPostReference.removeEventListener();
+    }
+    public void findUserByID(String key){
+        mPostReference = FirebaseDatabase.getInstance().getReference()
+                .child("users").child(key);
+        mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                UserModel.get().addFriends(dataSnapshot.getValue(User.class));
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
     // END Database Methods
 
     /// Getters ///

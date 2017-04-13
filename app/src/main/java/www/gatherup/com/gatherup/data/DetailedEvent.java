@@ -4,8 +4,11 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by edwinsventura on 3/20/17.
@@ -46,6 +49,29 @@ public class DetailedEvent implements Parcelable {
         owner = new User();
         atendeesList = new ArrayList<>();
         rating = 0.0;
+    }
+    public DetailedEvent(Event e){
+        SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+        try {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(sdf.parse(e.getDate()));
+            this.startDate = cal ;
+            this.endDate = cal;
+        } catch (ParseException e1) {
+            this.startDate = Calendar.getInstance();
+            this.endDate = Calendar.getInstance();
+        }
+        this.title = e.getTitle();
+        this.latitude = e.getLatitude();
+        this.longitude = e.getLongitude();
+        this.address = e.getAddress() + " "+ e.getCity() + " "+ e.getState()+ " "+ e.getZipcode();
+        this.category = e.getCategory();
+        this.Description = e.getDescription();
+        this.eventID = 0;
+        this.owner = new User();
+        this.atendeesList = new ArrayList<>();
+        this.rating = 0;
+
     }
 
     public int getEventID() {

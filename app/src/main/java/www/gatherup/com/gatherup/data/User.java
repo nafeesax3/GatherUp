@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by edwinsventura on 3/20/17.
@@ -15,6 +17,8 @@ public class User {//implements Parcelable {
     //public String mUserID;
     private String mFullName;
     private String mEmail;
+/*    private HashMap<String,Boolean> mEvents;
+    private HashMap<String,Boolean> mFollowing;*/
     //private String passwordHash;
     //private ArrayList<User> mFriendList;
     //private double latitude;
@@ -29,6 +33,8 @@ public class User {//implements Parcelable {
         this.mUsername = username;
         this.mFullName = fullName;
         this.mEmail = email;
+        /*mEvents = new HashMap<>();
+        mFollowing = new HashMap<>();*/
         //userId = 0;
         //passwordHash = "passwordHash";
         //latitude = 0.0;
@@ -47,6 +53,7 @@ public class User {//implements Parcelable {
         return mEmail;
     }
 
+
     public void setUsername(String username) {
         mUsername = username;
     }
@@ -58,6 +65,22 @@ public class User {//implements Parcelable {
     public void setEmail(String email) {
         mEmail = email;
     }
+
+/*    public HashMap<String,Boolean> getEvents() {
+        return mEvents;
+    }
+
+    public void setEvents(HashMap<String,Boolean> events) {
+        mEvents = events;
+    }
+
+    public HashMap<String,Boolean> getFollowing() {
+        return mFollowing;
+    }
+
+    public void setFollowing(HashMap<String,Boolean> following) {
+        mFollowing = following;
+    }*/
     //public String getUserID(){ return mUserID; }
     //public void setUserID(String userID){this.mUserID = userID;}
 /*
