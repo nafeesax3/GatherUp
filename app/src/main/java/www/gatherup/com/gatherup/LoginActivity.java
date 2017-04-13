@@ -87,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // TODO for testing purposes only
         etPass.setText("password");
         etEmail.setText("test12@test.com");
+        Firebase_Model.get().setAllEventListener();
     }
 
     /**
@@ -170,7 +171,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()) {
                             System.out.println("Nothing Done");
                             Firebase_Model.get().setMainUser();
-                            Firebase_Model.get().setAllEventListener();
+
                             //Firebase_Model.get().setRegisteredEventListener();
                             Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
                             startActivity(intent);

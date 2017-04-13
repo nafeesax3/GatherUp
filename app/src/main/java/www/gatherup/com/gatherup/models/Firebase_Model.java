@@ -115,12 +115,11 @@ public class Firebase_Model {
     }
 
     public void setRegisteredEventListener() {
-        mDatabase.child("users").child(mAuthUser.getUid()).child("events").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("users").child(mAuthUser.getUid()).child("events").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-                    //User u = postSnapshot.getValue(User.class);
-                    Firebase_Model.get().findEventByID(postSnapshot.getKey());
+                    findEventByID(postSnapshot.getKey());
                 }
             }
             @Override
@@ -131,7 +130,7 @@ public class Firebase_Model {
     }
     public void setAllEventListener() {
 
-        mDatabase.child("events").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("events").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Iterable<DataSnapshot> children = dataSnapshot.getChildren();
@@ -170,7 +169,7 @@ public class Firebase_Model {
 
     public void findEventByID(String key){
         mPostReference = FirebaseDatabase.getInstance().getReference()
-                .child("events").child(key);
+                .child("rsvp").child("events_users").child(key);
         mPostReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
