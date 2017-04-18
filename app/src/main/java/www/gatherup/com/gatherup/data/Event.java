@@ -1,5 +1,7 @@
 package www.gatherup.com.gatherup.data;
 
+import java.util.HashMap;
+
 /**
  * Created by Matthew Luce on 4/12/2017.
  */
@@ -15,6 +17,7 @@ public class Event {
     private String mState;
     private String mZipcode;
     private String mDescription;
+   // private HashMap<String,Boolean> mRegisteredUsers;
 
     private String mCreator;
     private double mLatitude;
@@ -24,7 +27,7 @@ public class Event {
     public Event(){}
     public Event(String title,String date,String startTime,int maxCapacity, String category,
                  String address,String city,String state, String zipcode,String description,
-                 String creator, double latitude,double longitude,int rating){
+                 double latitude,double longitude,int rating){
         this.mTitle = title;
         this.mDate = date;
         this.mStartTime = startTime;
@@ -35,12 +38,15 @@ public class Event {
         this.mState = state;
         this.mZipcode = zipcode;
         this.mDescription = description;
-        this.mCreator = creator;
+        //this.mCreator = creator;
         this.mLatitude = latitude;
         this.mLongitude = longitude;
         this.mRating = rating;
+        //mRegisteredUsers = new HashMap<>();
     }
-
+    /*public void addRegisteredUser(String userID){
+        mRegisteredUsers.put(userID,true);
+    }*/
     public String getTitle() {
         return mTitle;
     }
@@ -152,4 +158,14 @@ public class Event {
     public void setRating(int rating) {
         mRating = rating;
     }
+
+/*    public HashMap<String, Boolean> getRegisteredUsers() {
+        return mRegisteredUsers;
+    }
+
+    public void setRegisteredUsers(HashMap<String, Boolean> registeredUsers) {
+        mRegisteredUsers = registeredUsers;
+    }*/
+
+
 }

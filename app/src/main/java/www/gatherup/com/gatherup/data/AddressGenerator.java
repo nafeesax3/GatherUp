@@ -50,6 +50,7 @@ public class AddressGenerator {
         try{
             sAddresses = sGeocoder.getFromLocationName(address, 1);
             if(sAddresses == null || sAddresses.size()<1){return null;}
+            loc = new Location("");
             loc.setLatitude(sAddresses.get(0).getLatitude());
             loc.setLongitude(sAddresses.get(0).getLongitude());
 

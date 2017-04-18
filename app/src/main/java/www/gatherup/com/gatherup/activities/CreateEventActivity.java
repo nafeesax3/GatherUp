@@ -4,6 +4,7 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.location.Location;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -28,6 +29,9 @@ import java.util.Calendar;
 import www.gatherup.com.gatherup.GlobalAppState;
 import www.gatherup.com.gatherup.HomeScreenActivity;
 import www.gatherup.com.gatherup.R;
+import www.gatherup.com.gatherup.data.AddressGenerator;
+import www.gatherup.com.gatherup.data.Event;
+import www.gatherup.com.gatherup.models.Firebase_Model;
 import www.gatherup.com.gatherup.models.UserModel;
 
 public class CreateEventActivity extends AppCompatActivity {
@@ -36,9 +40,14 @@ public class CreateEventActivity extends AppCompatActivity {
     private Spinner category_Spin;
     private EditText date_ET;
     private EditText startTime_ET;
-    private EditText endTime_ET;
+    private EditText maxCap_ET;
+    private EditText city_ET;
+    private EditText state_ET;
+    private EditText zipcode_ET;
+    private EditText address_ET;
+    //private EditText endTime_ET;
     private Calendar mCalendar;
-    private DatePicker mDatePicker;
+    //private DatePicker mDatePicker;
     private int mYear, mMonth,mDay,mHour,mMin;
     private String eventCategory;
 
@@ -53,6 +62,13 @@ public class CreateEventActivity extends AppCompatActivity {
         description_ET = (TextView)findViewById(R.id.description_ET);
         category_Spin = (Spinner)findViewById(R.id.category_Spin);
         date_ET = (EditText) findViewById(R.id.date_ET);
+        address_ET = (EditText) findViewById(R.id.address_ET);
+
+        city_ET = (EditText) findViewById(R.id.city_ET);
+        state_ET = (EditText) findViewById(R.id.state_ET);
+        zipcode_ET = (EditText) findViewById(R.id.zipcode_ET);
+
+        maxCap_ET = (EditText) findViewById(R.id.maxCap_ET);
         startTime_ET = (EditText) findViewById(R.id.startTime_ET);
 
         category_Spin.setAdapter(new ArrayAdapter<String>(this,android.R.layout.simple_spinner_dropdown_item, ((GlobalAppState)getApplicationContext()).getCategories()));
@@ -62,8 +78,21 @@ public class CreateEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // send mDetailedEvent to database
-                Intent intent = new Intent(CreateEventActivity.this, HomeScreenActivity.class);
-                startActivity(intent);
+               Location loc =  AddressGenerator.getCoords(getApplicationContext(),address_ET.getText().toString()+" "+
+                       city_ET.getText().toString()+" "+ state_ET.getText().toString()+" "+ zipcode_ET.getText().toString());
+                if(loc == null){
+                    Toast.makeText(getApplicationContext(),"Address Not Found", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Firebase_Model.get().addEvent(new Event(title_ET.getText().toString(), date_ET.getText().toString(),
+                            startTime_ET.getText().toString(), Integer.parseInt(maxCap_ET.getText().toString()),
+                            category_Spin.getSelectedItem().toString(), address_ET.getText().toString(),
+                            city_ET.getText().toString(), state_ET.getText().toString(), zipcode_ET.getText().toString(),
+                            description_ET.getText().toString(), loc.getLatitude(), loc.getLongitude(), 0));
+
+                    Intent intent = new Intent(CreateEventActivity.this, HomeScreenActivity.class);
+                    startActivity(intent);
+                }
             }
         });
 

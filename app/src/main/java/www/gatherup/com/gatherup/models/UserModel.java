@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import www.gatherup.com.gatherup.data.DetailedEvent;
+import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.data.User;
 
 /**
@@ -12,9 +13,9 @@ import www.gatherup.com.gatherup.data.User;
 
 public class UserModel {
 
-    private List<DetailedEvent> mRegisteredDetailedEvents = new ArrayList<>();
-    private List<DetailedEvent> mDetailedEvents = new ArrayList<>();
-    private List<User> mFriends = new ArrayList<>();
+    private ArrayList<Event> mRegisteredEvents = new ArrayList<>();
+    private ArrayList<Event> mEvents = new ArrayList<>();
+    private ArrayList<User> mFriends = new ArrayList<>();
     private String mAccountName;
     //private String mAlias;
     private String mEmail;
@@ -29,23 +30,23 @@ public class UserModel {
         return sUserModel;
     }
 
-    public List<DetailedEvent> getRegisteredDetailedEvents() {
-        return mRegisteredDetailedEvents;
+    public ArrayList<Event> getRegisteredDetailedEvents() {
+        return mRegisteredEvents;
     }
 
-    public void addRegisteredEvents(DetailedEvent registeredDetailedEvent) {
-        mRegisteredDetailedEvents.add(registeredDetailedEvent);
+    public void addRegisteredEvent(Event aEvent) {
+        mRegisteredEvents.add(aEvent);
     }
 
-    public List<DetailedEvent> getDetailedEvents() {
-        return mDetailedEvents;
+    public ArrayList<Event> getEvents() {
+        return mEvents;
     }
 
-    public void addEvents(DetailedEvent aDetailedEvent) {
-        mDetailedEvents.add(aDetailedEvent);
+    public void addEvent(Event aEvent) {
+        mEvents.add(aEvent);
     }
 
-    public List<User> getFriends() {
+    public ArrayList<User> getFriends() {
         return mFriends;
     }
 
@@ -69,6 +70,12 @@ public class UserModel {
         this.mAccountName = user.getUsername();
         this.mEmail = user.getEmail();
         this.mFullname = user.getFullName();
+       /* for (String key: user.getEvents().keySet()) {
+            Firebase_Model.get().findEventByID(key);
+        }
+        for (String key: user.getFollowing().keySet()) {
+            Firebase_Model.get().findUserByID(key);
+        }*/
     }
 
 }

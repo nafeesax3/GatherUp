@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.concurrent.Executor;
 
 import www.gatherup.com.gatherup.activities.CreateAccountActivity;
+import www.gatherup.com.gatherup.data.Event;
 import www.gatherup.com.gatherup.data.User;
 import www.gatherup.com.gatherup.models.Firebase_Model;
 import www.gatherup.com.gatherup.models.UserModel;
@@ -86,6 +87,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // TODO for testing purposes only
         etPass.setText("password");
         etEmail.setText("test12@test.com");
+        Firebase_Model.get().setAllEventListener();
     }
 
     /**
@@ -103,7 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void onStop() {
         super.onStop();
         // TODO: Remove the AuthListener
-        Firebase_Model.get().removeAuthListener();
+        //Firebase_Model.get().removeAuthListener();
     }
 
     @Override
@@ -167,7 +169,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            System.out.println("Nothing Done");
                             Firebase_Model.get().setMainUser();
+                            Firebase_Model.get().setRegisteredEventListener();
                             Intent intent = new Intent(LoginActivity.this, HomeScreenActivity.class);
                             startActivity(intent);
                             Toast.makeText(LoginActivity.this, "Signed in", Toast.LENGTH_SHORT).show();
